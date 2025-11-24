@@ -17,8 +17,8 @@ function Login() {
             <main>
                 <div className="flex flex-row justify-between items-center">
                     <LoginHero imageSrc={pnglogin} altText="Logo" />
-                    <div className="flex flex-col justify-center items-center w-full h-[90%] px-[60px]">
-                        <div className="flex flex-col justify-center items-center gap-10 w-1/2 h-1/2 ml-[180px] mr-[60px] rounded-[10px]">
+                    <div className="flex flex-col justify-center items-center w-full h-[90%]">
+                        <div className="flex flex-col justify-center items-center gap-10 w-1/2 h-1/2 rounded-[10px]">
                             <LoginTitle
                                 title="Faça seu login!"
                                 subtitle="Após o login, você terá acesso ao seu histórico de denúncias e poder realizar novas denúncias, se necessário."
