@@ -16,16 +16,17 @@ function Register() {
         <>
             <Header />
             <main className="min-h-screen min-w-screen flex flex-col items-center justify-center">
-                <div className="grid grid-cols-1 lg:grid-cols-2 min-h-full w-full bg-(--color-primary) relative overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 min-h-full w-full bg-(--color-primary) relative overflow-hidden h-screen">
                     <div className="flex flex-col justify-center items-center h-full px-4 py-8 lg:py-0 z-10">
+                        <RegisterForm onSubmit={handleSubmit} />
+                        <RegisterFormFooter />
+                    </div>
+                    <div className="hidden lg:block relative py-8">
                         <RegisterTitle
                             title="Faltou energia? Denuncie agora e ajude a resolver mais rápido!"
                             subtitle="Contribua para uma cidade mais segura e iluminada. Registre aqui a falta de energia."
                         />
-                        <RegisterForm onSubmit={handleSubmit} />
-                        <RegisterFormFooter />
                     </div>
-                    <div className="hidden lg:block relative"></div>
 
                     <img
                         src={pessoa}

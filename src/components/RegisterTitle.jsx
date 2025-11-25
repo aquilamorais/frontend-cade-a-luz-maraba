@@ -1,11 +1,11 @@
 function RegisterTitle({ title, subtitle }) {
     return (
-        <div className="flex flex-col justify-center items-center gap-3 text-center mb-4">
-            <h1 className="text-3xl font-bold text-(--color-secondary)">
-                <span className="text-(--color-primary)">{title.split('?')[0]}?</span>
+        <div className="flex flex-col justify-center items-center gap-3 text-center mb-6 w-full max-w-3xl">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                <span className="text-(--color-tertiary)">{title.split('?')[0]}?</span>
                 {title.split('?')[1]}
             </h1>
-            <p className="text-gray-600 text-base max-w-md text-[10px]">{subtitle}</p>
+            <p className="text-white text-sm md:text-base leading-relaxed opacity-90">{subtitle}</p>
         </div>
     );
 }

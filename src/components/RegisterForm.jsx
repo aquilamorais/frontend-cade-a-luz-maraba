@@ -171,7 +171,7 @@ function RegisterForm({ onSubmit }) {
 
                     <button
                         type="submit"
-                        className="w-full py-3 px-4 bg-(--color-secondary) text-white font-bold rounded-lg hover:bg-(--color-primary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2"
+                        className="w-full py-3 px-4 bg-(--color-tertiary) text-white font-bold rounded-lg hover:bg-(--color-secondary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2"
                     >
                         Cadastrar
                     </button>
