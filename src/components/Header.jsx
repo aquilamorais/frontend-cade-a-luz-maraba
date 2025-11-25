@@ -9,11 +9,11 @@ function Header() {
                 <img style={{ width: '120px', height: '50px' }} src={logo2} alt="Logo2" />
             </div>
             <div className="flex flex-row justify-center items-center gap-4">
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-black cursor-pointer hover:text-(--color-secondary)">Home</button>
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-black cursor-pointer hover:text-(--color-secondary)">Sobre</button>
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-black cursor-pointer hover:text-(--color-secondary)">Contatos</button>
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-black cursor-pointer hover:text-(--color-secondary)">Ajuda</button>
-                <button className="px-5 py-2.5 border-none font-bold rounded-md bg-(--color-secondary) text-white cursor-pointer hover:bg-(--color-primary)">Faça seu login</button>
+                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Home</button>
+                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Sobre</button>
+                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Contatos</button>
+                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Ajuda</button>
+                <button className="px-5 py-2.5 border-none font-bold rounded-md bg-(--color-secondary) text-white cursor-pointer hover:bg-(--color-primary) transition-colors">Faça seu login</button>
             </div>
         </header>
     );
