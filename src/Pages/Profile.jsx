@@ -5,7 +5,7 @@ import ProfileForm from '../components/ProfileForm';
 import pessoa from '../assets/pessoa.png';
 
 function Profile() {
-    // Dados mockados do usuário - em produção viriam de uma API/contexto
+    // teste
     const userData = {
         nome: 'João Silva',
         cpf: '123.456.789-00',
@@ -15,7 +15,7 @@ function Profile() {
 
     const handleSubmit = (formData) => {
         console.log('Profile update:', formData);
-        // Aqui seria feita a chamada à API para atualizar os dados
+        // teste
     };
 
     return (
