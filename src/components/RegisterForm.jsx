@@ -27,7 +27,7 @@ function RegisterForm({ onSubmit }) {
 
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
+            <div alt="Register Form" className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
                 <h2 className="text-3xl font-bold text-(--color-secondary)">Criar conta</h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">

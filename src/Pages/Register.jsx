@@ -5,6 +5,7 @@ import RegisterForm from '../components/RegisterForm';
 import RegisterFormFooter from '../components/RegisterFormFooter';
 import RegisterHero from '../components/RegisterHero';
 import map from '../assets/map.png';
+import pessoa from '../assets/pessoa.png';
 
 function Register() {
     const handleSubmit = (formData) => {
@@ -14,9 +15,9 @@ function Register() {
     return (
         <>
             <Header />
-            <main className="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4">
-                <div className="flex flex-row justify-between items-center w-full max-w-7xl gap-12">
-                    <div className="flex flex-col justify-center items-center w-full max-w-xl">
+            <main className="min-h-screen min-w-screen flex flex-col items-center justify-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 min-h-full w-full bg-(--color-primary) relative overflow-hidden">
+                    <div className="flex flex-col justify-center items-center h-full px-4 py-8 lg:py-0 z-10">
                         <RegisterTitle
                             title="Faltou energia? Denuncie agora e ajude a resolver mais rápido!"
                             subtitle="Contribua para uma cidade mais segura e iluminada. Registre aqui a falta de energia."
@@ -24,9 +25,13 @@ function Register() {
                         <RegisterForm onSubmit={handleSubmit} />
                         <RegisterFormFooter />
                     </div>
-                    <div className="flex flex-col justify-center items-center w-full max-w-xl">
-                        <RegisterHero imageSrc={map} altText="Mapa" />
-                    </div>
+                    <div className="hidden lg:block relative"></div>
+
+                    <img
+                        src={pessoa}
+                        alt="Pessoa"
+                        className="hidden lg:block absolute bottom-0 right-0 h-[80%] max-h-[600px] w-auto object-contain object-bottom pointer-events-none xl:h-[85%] xl:max-h-[700px] 2xl:h-[90%] 2xl:max-h-[800px]"
+                    />
                 </div>
             </main>
             <Footer />
