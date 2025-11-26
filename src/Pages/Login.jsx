@@ -15,8 +15,8 @@ function Login() {
     return (
         <>
             <Header />
-            <main className="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4">
-                <div className="flex flex-row justify-between items-center max-w-7xl gap-12">
+            <main className="min-h-[calc(100vh-200px)] w-full flex items-center justify-center py-12 px-4">
+                <div className="flex flex-row justify-between items-center max-w-7xl gap-12 w-screen">
                     <LoginHero imageSrc={pnglogin} altText="Logo" />
                     <div className="flex flex-col justify-center items-center max-w-xl">
                         <LoginTitle

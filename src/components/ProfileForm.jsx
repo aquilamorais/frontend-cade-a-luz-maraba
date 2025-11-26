@@ -36,7 +36,7 @@ function ProfileForm({ onSubmit, initialData = {} }) {
 
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
+            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-2xl bg-white p-8 rounded-xl shadow-sm">
                 <h2 className="text-3xl font-bold text-(--color-secondary)">Meu Perfil</h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
@@ -151,13 +151,16 @@ function ProfileForm({ onSubmit, initialData = {} }) {
                             </button>
                         </div>
                     ) : (
-                        <button
-                            type="button"
-                            onClick={() => setIsEditing(true)}
-                            className="w-full py-3 px-4 bg-(--color-secondary) text-white font-bold rounded-lg hover:bg-(--color-primary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2"
-                        >
-                            Editar Perfil
-                        </button>
+                        <div className="flex w-full justify-center transition-all">
+                            <button
+                                type="button"
+                                onClick={() => setIsEditing(true)}
+                                className="min-w-sm py-3 px-4 bg-(--color-secondary) text-white font-bold rounded-lg hover:bg-(--color-primary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2"
+                            >
+                                Editar Perfil
+                            </button>
+                        </div>
+
                     )}
                 </form>
                 <div className="border-t-2 border-red-200 pt-5 mt-2 w-full">
@@ -168,7 +171,7 @@ function ProfileForm({ onSubmit, initialData = {} }) {
                     <p className="text-sm text-gray-600 mb-4">Ações irreversíveis relacionadas à sua conta</p>
                     <button
                         type="button"
-                        className="w-[50%] py-3 px-4 bg-transparent text-red-500 font-bold text-sm border-red-300 border-1 rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 hover:text-black focus:ring-red-500 focus:ring-offset-2 transition-all"
+                        className="w-[45%] py-3 px-4 bg-transparent text-red-500 font-bold text-sm border-red-300 border-1 rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 hover:text-black focus:ring-red-500 focus:ring-offset-2 transition-all"
                     >
                         Excluir conta
                     </button>

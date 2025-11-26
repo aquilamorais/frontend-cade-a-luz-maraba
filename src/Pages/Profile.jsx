@@ -22,7 +22,7 @@ function Profile() {
         <>
             <Header />
             <main className="h-screen flex flex-col">
-                <div className="flex flex-col gap-4 bg-(--color-primary) py-8 px-4">
+                <div className="flex flex-col gap-4 bg-(--color-secondary) py-8 px-4">
                     <div className="flex flex-col items-center w-full gap-4">
                         <ProfileTitle
                             title="Gerencie seu perfil"
