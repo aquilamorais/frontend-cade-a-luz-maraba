@@ -3,7 +3,7 @@ function QuickActions({ onNewReport, onViewProfile }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button
                 onClick={onNewReport}
-                className="flex flex-col items-center justify-center p-8 bg-linear-to-br from-(--color-secondary) to-(--color-primary) hover:from-(--color-primary) hover:to-(--color-secondary) rounded-xl shadow-md hover:shadow-xl transition-all transform hover:scale-105 active:scale-95"
+                className="flex flex-col items-center justify-center p-8 bg-linear-to-br from-(--color-tertiary) to-(--color-secondary) hover:from-(--color-primary) hover:to-(--color-secondary) rounded-xl shadow-md hover:shadow-xl transition-all transform hover:scale-105 active:scale-95"
             >
 
                 <h3 className="text-xl font-bold text-white mb-2">Nova Denúncia</h3>

@@ -1,4 +1,4 @@
-import mapImage from '../assets/map.png';
+import mapImage from '../../assets/map.png';
 
 function MapView() {
     return (

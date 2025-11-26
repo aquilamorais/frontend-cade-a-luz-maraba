@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import smsIcon from '../assets/sms.png';
-import cadeadoIcon from '../assets/cadeado.png';
-import checkIcon from '../assets/check.png';
+import smsIcon from '../../assets/sms.png';
+import cadeadoIcon from '../../assets/cadeado.png';
+import checkIcon from '../../assets/check.png';
 
 function LoginForm({ onSubmit }) {
     const [email, setEmail] = useState('');

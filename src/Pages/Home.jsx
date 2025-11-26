@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MapView from '../components/MapView';
-import QuickActions from '../components/QuickActions';
-import StatsOverview from '../components/StatsOverview';
-import MyReportsList from '../components/MyReportsList';
-import AllReportsList from '../components/AllReportsList';
+import MapView from '../components/Home/MapView';
+import QuickActions from '../components/Home/QuickActions';
+import StatsOverview from '../components/Home/StatsOverview';
+import MyReportsList from '../components/Home/MyReportsList';
+import AllReportsList from '../components/Home/AllReportsList';
+import HomeHeader from '../components/Home/HomeHeader';
 
 function Home() {
     const navigate = useNavigate();
@@ -78,7 +78,7 @@ function Home() {
 
     return (
         <>
-            <Header />
+            <HomeHeader />
             <main className="min-h-screen bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 py-8">
 

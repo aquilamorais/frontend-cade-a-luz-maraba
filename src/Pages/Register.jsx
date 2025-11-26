@@ -1,9 +1,9 @@
-import Header from '../components/Header';
+import Header from '../components/Register/Header';
 import Footer from '../components/Footer';
-import RegisterTitle from '../components/RegisterTitle';
-import RegisterForm from '../components/RegisterForm';
-import RegisterFormFooter from '../components/RegisterFormFooter';
-import RegisterHero from '../components/RegisterHero';
+import RegisterTitle from '../components/Register/RegisterTitle';
+import RegisterForm from '../components/Register/RegisterForm';
+import RegisterFormFooter from '../components/Register/RegisterFormFooter';
+import RegisterHero from '../components/Register/RegisterHero';
 import map from '../assets/map.png';
 import pessoa from '../assets/pessoa.png';
 

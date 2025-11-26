@@ -1,9 +1,9 @@
-import Header from '../components/Header';
+import LoginHeader from '../components/Login/LoginHeader';
 import Footer from '../components/Footer';
-import LoginHero from '../components/LoginHero';
-import LoginTitle from '../components/LoginTitle';
-import LoginForm from '../components/LoginForm';
-import LoginFormFooter from '../components/LoginFormFooter';
+import LoginHero from '../components/Login/LoginHero';
+import LoginTitle from '../components/Login/LoginTitle';
+import LoginForm from '../components/Login/LoginForm';
+import LoginFormFooter from '../components/Login/LoginFormFooter';
 import pnglogin from '../assets/pnglogin.png';
 import { Link } from 'react-router';
 
@@ -14,7 +14,7 @@ function Login() {
 
     return (
         <>
-            <Header />
+            <LoginHeader />
             <main className="min-h-[calc(100vh-200px)] w-full flex items-center justify-center py-12 px-4">
                 <div className="flex flex-row justify-between items-center max-w-7xl gap-12 w-screen">
                     <LoginHero imageSrc={pnglogin} altText="Logo" />

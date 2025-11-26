@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import logo from '../assets/logo.png';
 import logo2 from '../assets/logo2.png';
 
@@ -13,7 +14,9 @@ function Header() {
                 <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Sobre</button>
                 <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Contatos</button>
                 <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-gray-700 cursor-pointer hover:text-(--color-secondary) transition-colors">Ajuda</button>
-                <button className="px-5 py-2.5 border-none font-bold rounded-md bg-(--color-tertiary) text-white cursor-pointer hover:bg-(--color-secondary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2">Faça seu login</button>
+                <Link to="/login" className='px-5 py-2.5 border-none font-bold rounded-md bg-(--color-tertiary) text-white cursor-pointer hover:bg-(--color-secondary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2'>
+                    Faça seu login
+                </Link>
             </div>
         </header>
     );

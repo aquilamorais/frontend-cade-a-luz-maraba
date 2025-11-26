@@ -8,7 +8,7 @@ function ProfileHeader() {
     return (
         <header className="flex flex-row justify-between items-center px-8 py-2 bg-white bg-center">
             <div className="flex flex-row justify-center items-center gap-4">
-                <Link to="/register" className="flex flex-row items-center justify-center gap-2 py-2.5 bg-transparent border-none font-medium rounded-xl text-black cursor-pointer hover:text-(--color-secondary) transition-colors focus:bg-gray-300">
+                <Link to="/home" className="flex flex-row items-center justify-center gap-2 py-2.5 bg-transparent border-none font-medium rounded-xl text-black cursor-pointer hover:text-(--color-secondary) transition-colors focus:bg-gray-300">
                     <img src={back} alt="" className='w-[15%] h-[15%]' />
                     <span className='font-medium text-xl'>Voltar</span>
                 </Link>

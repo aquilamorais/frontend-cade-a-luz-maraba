@@ -1,7 +1,7 @@
 import Footer from '../components/Footer';
-import ProfileTitle from '../components/ProfileTitle';
-import ProfileForm from '../components/ProfileForm';
-import ProfileHeader from '../components/ProfileHeader';
+import ProfileTitle from '../components/Profile/ProfileTitle';
+import ProfileForm from '../components/Profile/ProfileForm';
+import ProfileHeader from '../components/Profile/ProfileHeader';
 import pessoa from '../assets/pessoa.png';
 
 function Profile() {

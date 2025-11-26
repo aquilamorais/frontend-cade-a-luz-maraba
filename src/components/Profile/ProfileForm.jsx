@@ -171,7 +171,7 @@ function ProfileForm({ onSubmit, initialData = {} }) {
                     <p className="text-sm text-gray-600 mb-4">Ações irreversíveis relacionadas à sua conta</p>
                     <button
                         type="button"
-                        className="w-[45%] py-3 px-4 bg-transparent text-red-500 font-bold text-sm border-red-300 border-1 rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 hover:text-black focus:ring-red-500 focus:ring-offset-2 transition-all"
+                        className="w-[45%] py-3 px-4 bg-transparent text-red-500 font-bold text-sm border-red-300 border rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 hover:text-black focus:ring-red-500 focus:ring-offset-2 transition-all"
                     >
                         Excluir conta
                     </button>
