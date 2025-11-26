@@ -1,7 +1,7 @@
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProfileTitle from '../components/ProfileTitle';
 import ProfileForm from '../components/ProfileForm';
+import ProfileHeader from '../components/ProfileHeader';
 import pessoa from '../assets/pessoa.png';
 
 function Profile() {
@@ -20,7 +20,7 @@ function Profile() {
 
     return (
         <>
-            <Header />
+            <ProfileHeader />
             <main className="h-screen flex flex-col">
                 <div className="flex flex-col gap-4 bg-(--color-secondary) py-8 px-4">
                     <div className="flex flex-col items-center w-full gap-4">
