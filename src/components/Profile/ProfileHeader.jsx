@@ -1,6 +1,6 @@
-import logo2 from '../assets/logo2.png';
-import logo from '../assets/logo.png';
-import back from '../assets/back.png';
+import logo2 from '../../assets/logo2.png';
+import logo from '../../assets/logo.png';
+import back from '../../assets/back.png';
 import { Link } from 'react-router';
 
 

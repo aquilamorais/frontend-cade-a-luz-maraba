@@ -73,7 +73,7 @@ function Home() {
     };
 
     const handleViewProfile = () => {
-        navigate('/profile');
+        navigate('/user');
     };
 
     return (

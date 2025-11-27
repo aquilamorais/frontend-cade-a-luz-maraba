@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import nomeIcon from '../assets/nome.png';
-import cpfIcon from '../assets/cpf.png';
-import smsIcon from '../assets/sms.png';
+import nomeIcon from '../../assets/nome.png';
+import cpfIcon from '../../assets/cpf.png';
+import smsIcon from '../../assets/sms.png';
 
 function ProfileForm({ onSubmit, initialData = {} }) {
     const [formData, setFormData] = useState({

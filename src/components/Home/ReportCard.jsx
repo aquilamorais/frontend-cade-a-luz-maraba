@@ -12,7 +12,7 @@ function ReportCard({ report, isOwn = false }) {
     };
 
     return (
-        <div className={`p-4 rounded-lg border-2 ${isOwn ? 'bg-blue-50 border-blue-200' : 'bg-gray-50 border-gray-200'} hover:shadow-md transition-all`}>
+        <div className={`p-4 rounded-lg border-2 ${isOwn ? 'bg-(--color-light) border-(--color-tertiary-light)' : 'bg-gray-50 border-gray-200'} hover:shadow-md transition-all`}>
             <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                     <h4 className="font-semibold text-gray-800 mb-1">{report.title}</h4>
