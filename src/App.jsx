@@ -3,11 +3,13 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Profile from './Pages/Profile';
 import Home from './Pages/Home';
+import CreateReport from './Pages/CreateReport';
 
 function App() {
   return (
     <Routes>
-      <Route path='/home' element={<Home />} />
+      <Route path="/create-report" element={<CreateReport />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/user" element={<Profile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
