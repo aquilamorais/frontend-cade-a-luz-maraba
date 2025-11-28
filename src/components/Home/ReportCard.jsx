@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router';
+
 function ReportCard({ report, isOwn = false }) {
+    const navigate = useNavigate();
+
     const statusColors = {
         'resolved': 'bg-green-100 text-green-700 border-green-300',
         'in_progress': 'bg-yellow-100 text-yellow-700 border-yellow-300',
@@ -11,8 +15,15 @@ function ReportCard({ report, isOwn = false }) {
         'open': 'Em Aberto'
     };
 
+    const handleClick = () => {
+        navigate(`/report/${report.id}`);
+    };
+
     return (
-        <div className={`p-4 rounded-lg border-2 ${isOwn ? 'bg-(--color-light) border-(--color-tertiary-light)' : 'bg-gray-50 border-gray-200'} hover:shadow-md transition-all`}>
+        <div
+            onClick={handleClick}
+            className={`p-4 rounded-lg border-2 ${isOwn ? 'bg-(--color-light) border-(--color-tertiary-light)' : 'bg-gray-50 border-gray-200'} hover:shadow-md transition-all cursor-pointer`}
+        >
             <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                     <h4 className="font-semibold text-gray-800 mb-1">{report.title}</h4>
