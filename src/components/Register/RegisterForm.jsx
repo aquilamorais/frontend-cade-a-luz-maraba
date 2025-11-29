@@ -1,28 +1,32 @@
-import { useState } from 'react';
 import nomeIcon from '../../assets/nome.png';
 import cpfIcon from '../../assets/cpf.png';
 import telefoneIcon from '../../assets/telefone.png';
 import smsIcon from '../../assets/sms.png';
 import cadeadoIcon from '../../assets/cadeado.png';
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const registerSchema = z.object({
+    nome: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
+    cpf: z.string().regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido"),
+    telefone: z.string().regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, "Telefone inválido"),
+    email: z.email("E-mail inválido"),
+    senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+    confirmarSenha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
+}).refine((data) => data.senha === data.confirmarSenha, {
+    message: "As senhas não coincidem",
+    path: ["confirmarSenha"]
+});
 
 function RegisterForm({ onSubmit }) {
-    const [formData, setFormData] = useState({
-        nome: '',
-        cpf: '',
-        telefone: '',
-        email: '',
-        senha: '',
-        confirmarSenha: ''
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(registerSchema),
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formData);
+    const handleSubmitForm = (data) => {
+        console.log(data);
+        onSubmit(data);
     };
 
     return (
@@ -30,7 +34,7 @@ function RegisterForm({ onSubmit }) {
             <div alt="Register Form" className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
                 <h2 className="text-3xl font-bold text-(--color-secondary)">Criar conta</h2>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
+                <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col gap-2">
                         <label htmlFor="nome" className="text-sm font-semibold text-gray-700">
                             Nome completo
@@ -44,14 +48,12 @@ function RegisterForm({ onSubmit }) {
                             <input
                                 id="nome"
                                 type="text"
-                                name="nome"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="Seu nome completo"
-                                value={formData.nome}
-                                onChange={handleChange}
-                                required
+                                {...register("nome")}
                             />
                         </div>
+                        {errors.nome && <p className="text-red-500 text-xs mt-1">{errors.nome.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -67,14 +69,12 @@ function RegisterForm({ onSubmit }) {
                             <input
                                 id="cpf"
                                 type="text"
-                                name="cpf"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="000.000.000-00"
-                                value={formData.cpf}
-                                onChange={handleChange}
-                                required
+                                {...register("cpf")}
                             />
                         </div>
+                        {errors.cpf && <p className="text-red-500 text-xs mt-1">{errors.cpf.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -90,14 +90,12 @@ function RegisterForm({ onSubmit }) {
                             <input
                                 id="telefone"
                                 type="tel"
-                                name="telefone"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="(00) 00000-0000"
-                                value={formData.telefone}
-                                onChange={handleChange}
-                                required
+                                {...register("telefone")}
                             />
                         </div>
+                        {errors.telefone && <p className="text-red-500 text-xs mt-1">{errors.telefone.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -113,14 +111,12 @@ function RegisterForm({ onSubmit }) {
                             <input
                                 id="email"
                                 type="email"
-                                name="email"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="seu@email.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
+                                {...register("email")}
                             />
                         </div>
+                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -136,14 +132,12 @@ function RegisterForm({ onSubmit }) {
                             <input
                                 id="senha"
                                 type="password"
-                                name="senha"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="••••••••"
-                                value={formData.senha}
-                                onChange={handleChange}
-                                required
+                                {...register("senha")}
                             />
                         </div>
+                        {errors.senha && <p className="text-red-500 text-xs mt-1">{errors.senha.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -159,14 +153,12 @@ function RegisterForm({ onSubmit }) {
                             <input
                                 id="confirmarSenha"
                                 type="password"
-                                name="confirmarSenha"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="••••••••"
-                                value={formData.confirmarSenha}
-                                onChange={handleChange}
-                                required
+                                {...register("confirmarSenha")}
                             />
                         </div>
+                        {errors.confirmarSenha && <p className="text-red-500 text-xs mt-1">{errors.confirmarSenha.message}</p>}
                     </div>
 
                     <button

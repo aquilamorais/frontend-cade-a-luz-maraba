@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 
 const SUPABASE_URL = 'https://zhjlrwaoornyrrvgeecx.supabase.co';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-
-const navigate = useNavigate();
+const SUPABASE_ANON_KEY = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY || '';
 
 export const api = axios.create({
     baseURL: `${SUPABASE_URL}/rest/v1`,
@@ -33,7 +30,7 @@ api.interceptors.response.use(
         if (error.response?.status === 401) {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
-            navigate('/login');
+            window.location.href = '/login';
         }
         return Promise.reject(error);
     }

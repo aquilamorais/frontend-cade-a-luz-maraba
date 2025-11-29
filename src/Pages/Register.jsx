@@ -6,10 +6,33 @@ import RegisterFormFooter from '../components/Register/RegisterFormFooter';
 import RegisterHero from '../components/Register/RegisterHero';
 import map from '../assets/map.png';
 import pessoa from '../assets/pessoa.png';
+import { api } from '../services/api';
+import { useNavigate } from 'react-router';
 
 function Register() {
-    const handleSubmit = (formData) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (formData) => {
         console.log('Register attempt:', formData);
+
+        try {
+            const userResponse = await api.post('/users', {
+                nome: formData.nome,
+                cpf: formData.cpf,
+                telefone: formData.telefone,
+                email: formData.email,
+                senha: formData.senha
+            });
+
+            console.log('Registrado com sucesso:', userResponse.data);
+
+            alert('Cadastro realizado com sucesso! Faça login para continuar.');
+            navigate('/login');
+
+        } catch (error) {
+            console.error('Erro no registro:', error.response?.data || error.message);
+            alert('Erro ao registrar. Verifique os dados e tente novamente.');
+        }
     };
 
     return (
