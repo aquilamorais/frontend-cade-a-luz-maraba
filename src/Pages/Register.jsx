@@ -17,11 +17,10 @@ function Register() {
 
         try {
             const userResponse = await api.post('/users', {
-                nome: formData.nome,
+                name: formData.nome,
                 cpf: formData.cpf,
-                telefone: formData.telefone,
                 email: formData.email,
-                senha: formData.senha
+                password: formData.senha
             });
 
             console.log('Registrado com sucesso:', userResponse.data);

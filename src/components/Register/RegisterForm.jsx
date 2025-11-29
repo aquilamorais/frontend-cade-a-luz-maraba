@@ -10,7 +10,6 @@ import { z } from 'zod';
 const registerSchema = z.object({
     nome: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
     cpf: z.string().max(12),
-    telefone: z.string().max(11),
     email: z.email("E-mail inválido"),
     senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
     confirmarSenha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
@@ -77,7 +76,7 @@ function RegisterForm({ onSubmit }) {
                         {errors.cpf && <p className="text-red-500 text-xs mt-1">{errors.cpf.message}</p>}
                     </div>
 
-                    <div className="flex flex-col gap-2">
+                    {/*<div className="flex flex-col gap-2">
                         <label htmlFor="telefone" className="text-sm font-semibold text-gray-700">
                             Telefone
                         </label>
@@ -96,7 +95,7 @@ function RegisterForm({ onSubmit }) {
                             />
                         </div>
                         {errors.telefone && <p className="text-red-500 text-xs mt-1">{errors.telefone.message}</p>}
-                    </div>
+                    </div>*/}
 
                     <div className="flex flex-col gap-2">
                         <label htmlFor="email" className="text-sm font-semibold text-gray-700">
