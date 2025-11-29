@@ -2,18 +2,26 @@ import { useState } from 'react';
 import smsIcon from '../../assets/sms.png';
 import cadeadoIcon from '../../assets/cadeado.png';
 import checkIcon from '../../assets/check.png';
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const loginSchema = z.object({
+    email: z.email("E-mail inválido"),
+    password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+});
 
 function LoginForm({ onSubmit }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(loginSchema),
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (onSubmit) {
-            onSubmit({ email, password, rememberMe });
-        }
+    const handleSubmitForm = (data) => {
+        console.log(data);
+        onSubmit(data);
     };
+
+    const [rememberMe, setRememberMe] = useState(false);
 
     const handleForgotPassword = (e) => {
         e.preventDefault();
@@ -25,7 +33,7 @@ function LoginForm({ onSubmit }) {
             <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
                 <h2 className="text-3xl font-bold text-(--color-secondary)">Login</h2>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
+                <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col gap-2">
                         <label htmlFor="email" className="text-sm font-semibold text-gray-700">
                             E-mail
@@ -41,11 +49,10 @@ function LoginForm({ onSubmit }) {
                                 type="email"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="seu@email.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
+                                {...register("email")}
                             />
                         </div>
+                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -63,11 +70,10 @@ function LoginForm({ onSubmit }) {
                                 type="password"
                                 className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
                                 placeholder="••••••••"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
+                                {...register("password")}
                             />
                         </div>
+                        {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
                     </div>
 
                     <div className="flex items-center justify-between">

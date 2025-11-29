@@ -9,8 +9,14 @@ import { z } from 'zod';
 
 const registerSchema = z.object({
     nome: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
-    cpf: z.string().regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido"),
-    telefone: z.string().regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, "Telefone inválido"),
+    cpf: z.string()
+        .transform((val) => val.replace(/\D/g, ''))
+        .refine((val) => val.length === 11, "CPF deve ter 11 dígitos")
+        .transform((val) => val.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")),
+    telefone: z.string()
+        .transform((val) => val.replace(/\D/g, ''))
+        .refine((val) => val.length >= 10 && val.length <= 11, "Telefone deve ter 10 ou 11 dígitos")
+        .transform((val) => val.replace(/(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3")),
     email: z.email("E-mail inválido"),
     senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
     confirmarSenha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
