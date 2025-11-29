@@ -9,8 +9,8 @@ import { z } from 'zod';
 
 const registerSchema = z.object({
     nome: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
-    cpf: z.string().regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF deve estar no formato 000.000.000-00"),
-    telefone: z.string().regex(/^\\d{2}\ \d{4,5}-\d{4}$/, "Telefone deve estar no formato 00 00000-0000"),
+    cpf: z.string().max(12),
+    telefone: z.string().max(11),
     email: z.email("E-mail inválido"),
     senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
     confirmarSenha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
