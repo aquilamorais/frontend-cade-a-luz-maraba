@@ -7,31 +7,37 @@ import LoginFormFooter from '../components/Login/LoginFormFooter';
 import pnglogin from '../assets/pnglogin.png';
 import { Link } from 'react-router';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import { api } from '../services/api';
 
 function Login() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (formData) => {
+        setIsLoading(true);
         console.log('Login attempt:', formData);
 
-        try {
-            const userResponse = await api.post('/login', {
-                email: formData.email,
-                password: formData.senha,
+        api.post('/login', {
+            email: formData.email,
+            password: formData.password,
+        })
+            .then((response) => {
+                const { token } = response.data;
+                localStorage.setItem('token', token);
+
+                console.log("Login com sucesso:", response.data);
+
+                alert('Login realizado com sucesso! Bem-vindo de volta.');
+                navigate('/home');
+            })
+            .catch((error) => {
+                console.error('Erro no login:', error.response?.data || error.message);
+                alert('Erro ao fazer login. Verifique os dados e tente novamente.');
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
-
-            const { token } = userResponse.data;
-            localStorage.setItem('token', token);
-
-            console.log("Login com sucesso:", userResponse.data);
-
-            alert('Login realizado com sucesso! Bem-vindo de volta.');
-            navigate('/home');
-        } catch (error) {
-            console.error('Erro no login:', error.response?.data || error.message);
-            alert('Erro ao fazer login. Verifique os dados e tente novamente.');
-        }
     }
 
     return (
