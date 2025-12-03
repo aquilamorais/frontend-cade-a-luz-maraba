@@ -8,11 +8,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 const registerSchema = z.object({
-    nome: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
-    cpf: z.string().length(11, "O CPF deve ter 12 caracteres"),
+    nome: z.string().min(3, "O nome deve ter pelo menos 3 caracteres"),
+    cpf: z.string().min(11, "O CPF deve ter 11 dígitos").max(14, "CPF inválido"),
     email: z.email("E-mail inválido"),
-    senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
-    confirmarSenha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+    senha: z.string().min(8, "A senha deve ter pelo menos 8 caracteres"),
+    confirmarSenha: z.string().min(8, "A senha deve ter pelo menos 8 caracteres"),
 }).refine((data) => data.senha === data.confirmarSenha, {
     message: "As senhas não coincidem",
     path: ["confirmarSenha"]

@@ -17,16 +17,19 @@ function Register() {
 
     const handleSubmit = async (formData) => {
         setIsLoading(true);
+
+        const cpfLimpo = formData.cpf.replace(/\D/g, '');
+
         console.log('Register attempt:', {
             name: formData.nome,
-            cpf: formData.cpf,
+            cpf: cpfLimpo,
             email: formData.email,
             password: formData.senha,
         });
 
         api.post('/users', {
             name: formData.nome,
-            cpf: formData.cpf,
+            cpf: cpfLimpo,
             email: formData.email,
             password: formData.senha,
         })
