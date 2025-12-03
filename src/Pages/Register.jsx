@@ -8,30 +8,41 @@ import map from '../assets/map.png';
 import pessoa from '../assets/pessoa.png';
 import { api } from '../services/api';
 import { useNavigate } from 'react-router';
+import { AxiosError } from "axios";
+import { useState } from 'react';
 
 function Register() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (formData) => {
-        console.log('Register attempt:', formData);
+        setIsLoading(true);
+        console.log('Register attempt:', {
+            name: formData.nome,
+            cpf: formData.cpf,
+            email: formData.email,
+            password: formData.senha,
+        });
 
-        try {
-            const userResponse = await api.post('/users', {
-                name: formData.nome,
-                cpf: formData.cpf,
-                email: formData.email,
-                password: formData.senha
+        api.post('/users', {
+            name: formData.nome,
+            cpf: formData.cpf,
+            email: formData.email,
+            password: formData.senha,
+        })
+            .then((response) => {
+                console.log("Registro com sucesso:", response.data);
+                alert('Registro realizado com sucesso! Agora você pode fazer login.');
+                navigate('/login');
+            })
+            .catch((error) => {
+                if (error instanceof AxiosError) return alert(error.response?.data.message);
+                console.error('Erro no registro:', error.response?.data || error.message);
+                alert('Erro ao fazer registro. Verifique os dados e tente novamente.');
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
-
-            console.log('Registrado com sucesso:', userResponse.data);
-
-            alert('Cadastro realizado com sucesso! Faça login para continuar.');
-            navigate('/login');
-
-        } catch (error) {
-            console.error('Erro no registro:', error.response?.data || error.message);
-            alert('Erro ao registrar. Verifique os dados e tente novamente.');
-        }
     };
 
     return (
