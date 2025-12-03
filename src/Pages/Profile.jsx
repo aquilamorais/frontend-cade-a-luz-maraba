@@ -13,6 +13,18 @@ function Profile() {
         role: 'MEMBER'
     };
 
+    api.get('/users/me', {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+    })
+        .then((response) => {
+            console.log('Dados do usuário:', response.data);
+        })
+        .catch((error) => {
+            console.error('Erro ao obter dados do usuário:', error.response?.data || error.message);
+        });
+
     const handleSubmit = (formData) => {
         console.log('Profile update:', formData);
         // teste

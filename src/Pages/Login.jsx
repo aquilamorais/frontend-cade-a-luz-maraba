@@ -56,7 +56,6 @@ function Login() {
                     </div>
                 </div>
             </main>
-            <Link to="/user">Usuário exemplo</Link>
             <Footer />
         </>
     );
