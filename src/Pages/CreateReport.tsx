@@ -2,9 +2,10 @@ import Footer from '../components/Footer';
 import CreateReportHeader from '../components/CreateReport/CreateReportHeader';
 import CreateReportTitle from '../components/CreateReport/CreateReportTitle';
 import CreateReportForm from '../components/CreateReport/CreateReportForm';
+import { ReportFormData } from '../types/reportFormData';
 
 function CreateReport() {
-    const handleSubmit = (formData) => {
+    const handleSubmit = (formData: ReportFormData) => {
         console.log('Report submission:', formData);
     };
 
