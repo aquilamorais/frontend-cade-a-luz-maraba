@@ -3,7 +3,7 @@ import Footer from '../../components/Footer';
 import RegisterForm from '../../components/Register/RegisterForm';
 import RegisterFormFooter from '../../components/Register/RegisterFormFooter';
 import RegisterTitle from '../../components/Register/RegisterTitle';
-import pessoa from '../../assets/images/pessoa.png';
+import pessoa from '../../assets/pessoa.png';
 import { api } from '../../services/api';
 import { useNavigate } from 'react-router';
 import { AxiosError } from "axios";
