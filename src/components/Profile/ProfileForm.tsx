@@ -69,33 +69,6 @@ function ProfileForm({ onSubmit, initialData = {} }: ProfileFormProps) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="cpf" className="text-sm font-semibold text-gray-700">
-                            CPF
-                        </label>
-                        <div className="relative">
-                            <img
-                                src={cpfIcon}
-                                alt=""
-                                className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 opacity-50"
-                            />
-                            <input
-                                id="cpf"
-                                type="text"
-                                name="cpf"
-                                className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg transition-colors ${isEditing
-                                    ? 'border-gray-300 bg-white focus:border-(--color-secondary) focus:outline-none'
-                                    : 'border-gray-200 bg-gray-50 cursor-not-allowed'
-                                    }`}
-                                placeholder="000.000.000-00"
-                                value={formData.cpf}
-                                onChange={handleChange}
-                                disabled={!isEditing}
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
                         <label htmlFor="email" className="text-sm font-semibold text-gray-700">
                             E-mail
                         </label>

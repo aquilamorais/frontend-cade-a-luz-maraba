@@ -1,10 +1,7 @@
-// Decodifica o token JWT para extrair os dados do usuário
 export function decodeToken(token) {
     if (!token) return null;
     
     try {
-        // O token JWT tem 3 partes separadas por "."
-        // A segunda parte contém os dados (payload)
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         const jsonPayload = decodeURIComponent(
@@ -20,7 +17,6 @@ export function decodeToken(token) {
     }
 }
 
-// Retorna os dados do usuário logado a partir do token
 export function getLoggedUser() {
     const token = localStorage.getItem('token');
     if (!token) return null;
@@ -37,7 +33,6 @@ export function getLoggedUser() {
     };
 }
 
-// Verifica se o usuário está logado
 export function isAuthenticated() {
     const token = localStorage.getItem('token');
     if (!token) return false;
@@ -45,7 +40,6 @@ export function isAuthenticated() {
     const decoded = decodeToken(token);
     if (!decoded) return false;
     
-    // Verifica se o token expirou
     const currentTime = Date.now() / 1000;
     if (decoded.exp && decoded.exp < currentTime) {
         localStorage.removeItem('token');
@@ -55,7 +49,6 @@ export function isAuthenticated() {
     return true;
 }
 
-// Faz logout removendo o token
 export function logout() {
     localStorage.removeItem('token');
 }
