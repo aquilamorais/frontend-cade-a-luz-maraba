@@ -1,10 +1,17 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from '../../assets/logo.png';
 import logo2 from '../../assets/logo2.png';
 import user from '../../assets/nome.png';
 import sair from '../../assets/sair.png';
 
 function HomeHeader() {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
     return (
         <header className="flex flex-row justify-between items-center px-8 py-2 bg-white bg-center">
             <div className="flex flex-row justify-center items-center gap-2.5">
@@ -20,9 +27,12 @@ function HomeHeader() {
                     <Link to="/user" className='flex flex-col justify-center items-center py-2.5 w-1/2 border-none font-bold rounded-md bg-(--color-tertiary cursor-pointer hover:bg-(--gray-light) focus:outline-none focus:ring-2 focus:ring-(--gray-light) focus:ring-offset-2 transition-all mt-2'>
                         <img src={user} alt="" style={{ width: '60%', height: '60%' }} />
                     </Link>
-                    <Link to="/login" className='flex flex-col justify-center items-center py-2.5 w-1/2 border-none font-bold rounded-md bg-(--color-tertiary cursor-pointer hover:bg-(--gray-light) focus:outline-none focus:ring-2 focus:ring-(--gray-light) focus:ring-offset-2 transition-all mt-2'>
+                    <button 
+                        onClick={handleLogout}
+                        className='flex flex-col justify-center items-center py-2.5 w-1/2 border-none font-bold rounded-md bg-(--color-tertiary cursor-pointer hover:bg-(--gray-light) focus:outline-none focus:ring-2 focus:ring-(--gray-light) focus:ring-offset-2 transition-all mt-2'
+                    >
                         <img src={sair} alt="" style={{ width: '60%', height: '60%' }} />
-                    </Link>
+                    </button>
                 </div>
             </div>
         </header>

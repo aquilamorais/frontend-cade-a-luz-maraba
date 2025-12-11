@@ -1,10 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import nomeIcon from '../../assets/nome.png';
-import cpfIcon from '../../assets/cpf.png';
 import smsIcon from '../../assets/sms.png';
 import { ProfileFormProps, ProfileFormData } from './Types';
 
-function ProfileForm({ onSubmit, initialData = {} }: ProfileFormProps) {
+function ProfileForm({ onSubmit, onDelete, initialData = {} }: ProfileFormProps) {
     const [formData, setFormData] = useState<ProfileFormData>({
         nome: initialData.nome || '',
         cpf: initialData.cpf || '',
@@ -145,6 +144,7 @@ function ProfileForm({ onSubmit, initialData = {} }: ProfileFormProps) {
                     <p className="text-sm text-gray-600 mb-4">Ações irreversíveis relacionadas à sua conta</p>
                     <button
                         type="button"
+                        onClick={onDelete}
                         className="w-[45%] py-3 px-4 bg-transparent text-red-500 font-bold text-sm border-red-300 border rounded-lg hover:bg-red-200 focus:outline-none focus:ring-2 hover:text-black focus:ring-red-500 focus:ring-offset-2 transition-all"
                     >
                         Excluir conta

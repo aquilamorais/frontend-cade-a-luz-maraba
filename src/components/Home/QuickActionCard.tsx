@@ -1,6 +1,6 @@
 import { QuickActionCardProps } from './Types';
 
-function QuickActionCard({ title, description, icon, onClick, bgColor, hoverColor, textColor }: QuickActionCardProps): JSX.Element {
+function QuickActionCard({ title, description, icon, onClick, bgColor, hoverColor, textColor }: QuickActionCardProps){
     return (
         <button
             onClick={onClick}

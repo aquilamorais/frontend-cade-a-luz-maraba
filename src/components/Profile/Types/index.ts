@@ -9,6 +9,7 @@ export interface ProfileFormData {
 
 export interface ProfileFormProps {
     onSubmit: (data: ProfileFormData) => void;
+    onDelete: () => void;
     initialData?: Partial<ProfileFormData>;
 }
 

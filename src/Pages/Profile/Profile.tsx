@@ -12,6 +12,16 @@ function Profile() {
     const navigate = useNavigate();
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [isModalClosing, setIsModalClosing] = useState<boolean>(false);
+
+    const closeModal = () => {
+        setIsModalClosing(true);
+        setTimeout(() => {
+            setShowDeleteModal(false);
+            setIsModalClosing(false);
+        }, 200);
+    };
 
     useEffect(() => {
         if (!isAuthenticated()) {
@@ -82,6 +92,32 @@ function Profile() {
             });
     };
 
+    const handleDelete = () => {
+        if (!userData) {
+            alert('Não foi possível identificar o usuário.');
+            return;
+        }
+        setShowDeleteModal(true);
+    };
+
+    const confirmDelete = () => {
+        if (!userData) return;
+
+        api.delete(`/users/${userData.id}`)
+            .then(() => {
+                alert('Conta excluída com sucesso!');
+                localStorage.removeItem('token');
+                navigate('/login');
+            })
+            .catch((error) => {
+                console.error('Erro ao excluir conta:', error.response?.data || error.message);
+                alert('Erro ao excluir conta. Tente novamente.');
+            })
+            .finally(() => {
+                setShowDeleteModal(false);
+            });
+    };
+
     if (loading) {
         return (
             <>
@@ -104,11 +140,47 @@ function Profile() {
                             title="Gerencie seu perfil"
                             subtitle="Mantenha seus dados atualizados para receber notificações e acompanhar suas denúncias."
                         />
-                        {userData && <ProfileForm onSubmit={handleSubmit} initialData={userData} />}
+                        {userData && <ProfileForm onSubmit={handleSubmit} onDelete={handleDelete} initialData={userData} />}
                     </div>
                 </div>
             </main>
             <Footer />
+
+            {showDeleteModal && (
+                <div 
+                    className={`fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity duration-200 ${isModalClosing ? 'opacity-0' : 'opacity-100'}`}
+                    onClick={closeModal}
+                >
+                    <div 
+                        className={`bg-white rounded-xl p-6 w-full max-w-md mx-4 shadow-2xl transition-all duration-200 ${isModalClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex flex-col items-center text-center gap-4">
+                            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                                <span className="text-3xl">⚠️</span>
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-800">Excluir conta</h3>
+                            <p className="text-gray-600">
+                                Tem certeza que deseja excluir sua conta? Esta ação é <span className="font-bold text-red-600">irreversível</span> e todos os seus dados serão perdidos permanentemente.
+                            </p>
+                            <div className="flex gap-3 w-full mt-2">
+                                <button
+                                    onClick={closeModal}
+                                    className="flex-1 py-3 px-4 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-all"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    onClick={confirmDelete}
+                                    className="flex-1 py-3 px-4 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600 transition-all"
+                                >
+                                    Excluir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

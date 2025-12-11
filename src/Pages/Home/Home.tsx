@@ -14,7 +14,9 @@ function Home() {
     const stats: Stats = {
         resolved: 45,
         inProgress: 12,
-        open: 8
+        open: 8,
+        total: 65,
+        pending: 20
     };
 
     const myReports: Report[] = [

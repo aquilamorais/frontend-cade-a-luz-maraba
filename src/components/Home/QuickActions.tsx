@@ -1,6 +1,6 @@
 import { QuickActionsProps } from './Types';
 
-function QuickActions({ onNewReport, onViewProfile }: QuickActionsProps): JSX.Element {
+function QuickActions({ onNewReport, onViewProfile }: QuickActionsProps){
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button

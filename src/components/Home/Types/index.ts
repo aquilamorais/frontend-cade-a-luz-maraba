@@ -12,6 +12,8 @@ export interface Report {
 
 export interface Stats {
     resolved: number;
+    total: number;
+    pending: number;
     inProgress: number;
     open: number;
 }
@@ -47,7 +49,6 @@ export interface QuickActionCardProps {
 export interface StatsCardProps {
     title: string;
     count: number;
-    icon: string;
     color: string;
     bgColor: string;
 }

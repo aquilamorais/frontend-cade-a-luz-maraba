@@ -1,7 +1,7 @@
 import ReportCard from './ReportCard';
 import { ReportsListProps } from './Types';
 
-function MyReportsList({ reports }: ReportsListProps): JSX.Element {
+function MyReportsList({ reports }: ReportsListProps) {
     return (
         <div className="w-full bg-white rounded-xl shadow-sm p-6">
             <div className="flex items-center justify-between mb-6">
