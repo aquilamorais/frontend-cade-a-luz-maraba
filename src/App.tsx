@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-import Profile from './Pages/Profile';
-import Home from './Pages/Home';
-import CreateReport from './Pages/CreateReport';
-import ReportDetails from './Pages/ReportDetails';
+import Login from './Pages/Login/Login';
+import Register from './Pages/Register/Register';
+import Profile from './Pages/Profile/Profile';
+import Home from './Pages/Home/Home';
+import CreateReport from './Pages/CreateReport/CreateReport';
+import ReportDetails from './Pages/ReportDetails/ReportDetails';
 
 function App() {
   return (
@@ -21,4 +21,3 @@ function App() {
 }
 
 export default App;
-
