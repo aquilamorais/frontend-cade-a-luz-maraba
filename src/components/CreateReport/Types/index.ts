@@ -3,6 +3,7 @@ export type ReportType = 'FALTA_ENERGIA' | 'INCENDIO' | 'OSCILACAO' | 'MANUTENCA
 export interface CreateReportFormData {
     titulo: string;
     descricao: string;
+    imagem: string;
     endereco: string;
     bairro: string;
     cidade: string;

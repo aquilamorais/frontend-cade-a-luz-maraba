@@ -1,11 +1,13 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import mapIcon from '../../assets/map.png';
 import { CreateReportFormProps, CreateReportFormData } from './Types';
+import ImageUpload from './ImageUpload';
 
 function CreateReportForm({ onSubmit }: CreateReportFormProps){
     const [formData, setFormData] = useState<CreateReportFormData>({
         titulo: '',
         descricao: '',
+        imagem: '',
         endereco: '',
         bairro: '',
         cidade: 'Marabá',
@@ -107,9 +109,10 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
                         />
                     </div>
 
-                    <div className="flex justify-center rounded-2xl border-2 border-(--gray-light)">
-                        <img src="https://i.pinimg.com/1200x/f3/88/a4/f388a4e8540b810c2e2482a49562d5c3.jpg" alt="" className='h-48 rounded-2xl ' />
-                    </div>
+                    <ImageUpload 
+                        onImageUpload={(url) => setFormData(prev => ({ ...prev, imagem: url }))}
+                        currentImage={formData.imagem}
+                    />
 
                     <div className="border-t-2 border-gray-200 pt-5 mt-2">
                         <div className="flex items-center justify-between mb-4">

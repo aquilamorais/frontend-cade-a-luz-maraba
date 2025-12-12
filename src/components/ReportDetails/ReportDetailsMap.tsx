@@ -1,8 +1,19 @@
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Icon } from 'leaflet';
 import mapIcon from '../../assets/map.png';
 import { ReportDetailsMapProps } from './Types';
 
+const defaultIcon = new Icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
 function ReportDetailsMap({ location }: ReportDetailsMapProps) {
-    const mapUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}&z=15&output=embed`;
     const googleMapsLink = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
 
     return (
@@ -21,16 +32,22 @@ function ReportDetailsMap({ location }: ReportDetailsMapProps) {
             </div>
 
             <div className="relative w-full h-[400px] rounded-lg overflow-hidden border-2 border-gray-200">
-                <iframe
-                    src={mapUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Mapa da localização"
-                ></iframe>
+                <MapContainer
+                    center={[location.latitude, location.longitude]}
+                    zoom={15}
+                    scrollWheelZoom={true}
+                    style={{ height: '100%', width: '100%' }}
+                >
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={[location.latitude, location.longitude]} icon={defaultIcon}>
+                        <Popup>
+                            <span className="font-semibold">Localização da denúncia</span>
+                        </Popup>
+                    </Marker>
+                </MapContainer>
             </div>
 
             <div className="mt-4 p-3 bg-gray-50 rounded-lg">
