@@ -6,6 +6,8 @@ export interface Report {
     description: string;
     address: string;
     neighborhood: string;
+    latitude?: number | null;
+    longitude?: number | null;
     status: ReportStatus;
     hour: string;
     createAt: string;

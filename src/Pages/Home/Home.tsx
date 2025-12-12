@@ -103,7 +103,7 @@ function Home() {
 
 
                     <div className="mb-8">
-                        <MapView />
+                        <MapView reports={allReports} />
                     </div>
 
                     {loading ? (

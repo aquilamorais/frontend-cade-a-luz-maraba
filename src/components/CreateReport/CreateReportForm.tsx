@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import mapIcon from '../../assets/map.png';
 import { CreateReportFormProps, CreateReportFormData } from './Types';
 import ImageUpload from './ImageUpload';
+import LocationPickerMap from './LocationPickerMap';
 
 function CreateReportForm({ onSubmit }: CreateReportFormProps){
     const [formData, setFormData] = useState<CreateReportFormData>({
@@ -18,16 +18,21 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
         tipo: 'FALTA_ENERGIA'
     });
 
-    const [useCurrentLocation, setUseCurrentLocation] = useState<boolean>(false);
-
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleLocationSelect = (lat: number, lng: number) => {
+        setFormData(prev => ({
+            ...prev,
+            latitude: lat.toString(),
+            longitude: lng.toString()
+        }));
+    };
+
     const handleGetLocation = () => {
         if (navigator.geolocation) {
-            setUseCurrentLocation(true);
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     setFormData(prev => ({
@@ -38,8 +43,7 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
                 },
                 (error) => {
                     console.error('Erro ao obter localização:', error);
-                    alert('Não foi possível obter sua localização. Por favor, insira manualmente.');
-                    setUseCurrentLocation(false);
+                    alert('Não foi possível obter sua localização. Por favor, marque no mapa.');
                 }
             );
         } else {
@@ -122,9 +126,16 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
                                 onClick={handleGetLocation}
                                 className="flex items-center gap-2 px-4 py-2 bg-(--color-tertiary) text-white text-sm font-semibold rounded-lg hover:bg-(--color-secondary) transition-colors"
                             >
-                                <img src={mapIcon} alt="" className="w-4 h-4" />
-                                {useCurrentLocation ? 'Localização Obtida' : 'Usar Localização Atual'}
+                                📍 Usar Minha Localização
                             </button>
+                        </div>
+
+                        <div className="mb-5">
+                            <LocationPickerMap
+                                onLocationSelect={handleLocationSelect}
+                                initialLat={formData.latitude ? parseFloat(formData.latitude) : undefined}
+                                initialLng={formData.longitude ? parseFloat(formData.longitude) : undefined}
+                            />
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -202,40 +213,6 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
                                     disabled
                                 />
                             </div>
-
-                            {!useCurrentLocation && (
-                                <>
-                                    <div className="flex flex-col gap-2">
-                                        <label htmlFor="latitude" className="text-sm font-semibold text-gray-700">
-                                            Latitude (opcional)
-                                        </label>
-                                        <input
-                                            id="latitude"
-                                            type="text"
-                                            name="latitude"
-                                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
-                                            placeholder="-5.3686"
-                                            value={formData.latitude}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-
-                                    <div className="flex flex-col gap-2">
-                                        <label htmlFor="longitude" className="text-sm font-semibold text-gray-700">
-                                            Longitude (opcional)
-                                        </label>
-                                        <input
-                                            id="longitude"
-                                            type="text"
-                                            name="longitude"
-                                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
-                                            placeholder="-49.1178"
-                                            value={formData.longitude}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                </>
-                            )}
                         </div>
                     </div>
 

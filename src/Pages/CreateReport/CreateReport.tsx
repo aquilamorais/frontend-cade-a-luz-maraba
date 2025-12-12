@@ -27,6 +27,8 @@ function CreateReport() {
                 img: formData.imagem || undefined,
                 address: formData.endereco,
                 neighborhood: formData.bairro,
+                latitude: formData.latitude ? parseFloat(formData.latitude) : undefined,
+                longitude: formData.longitude ? parseFloat(formData.longitude) : undefined,
                 hour: new Date().toISOString(),
                 option: mapTipoToOption(formData.tipo)
             };
