@@ -45,12 +45,7 @@ function ReportCard({ report, isOwn = false }: ReportCardProps) {
                 <span className={`px-3 py-1 rounded-full text-xs font-bold border-2 ${statusColors[report.status]} whitespace-nowrap ml-2`}>
                     {statusLabels[report.status]}
                 </span>
-            </div>
-            <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-200">
-                <span>{formatDate(report.createAt)}</span>
-                {isOwn && <span className="font-semibold text-blue-600">Sua denúncia</span>}
-                {!isOwn && <span>{report.user.name}</span>}
-            </div>
+            </div>           
         </div>
     );
 }

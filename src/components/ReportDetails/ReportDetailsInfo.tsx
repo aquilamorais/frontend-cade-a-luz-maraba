@@ -75,12 +75,6 @@ function ReportDetailsInfo({ report }: ReportDetailsInfoProps){
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <h3 className="text-sm font-semibold text-gray-600">Reportado por</h3>
-                        <p className="text-gray-800">{report.user.name}</p>
-                        <p className="text-sm text-gray-600">{report.user.email}</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
                         <h3 className="text-sm font-semibold text-gray-600">Data de Criação</h3>
                         <p className="text-gray-800">{report.createdAt}</p>
                     </div>
