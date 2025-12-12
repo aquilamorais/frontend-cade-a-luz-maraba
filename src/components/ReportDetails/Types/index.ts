@@ -1,10 +1,10 @@
-export type ReportStatus = 'resolved' | 'in_progress' | 'open';
+export type ReportStatus = 'ABERTO' | 'EM_ANDAMENTO' | 'RESOLVIDO';
 
 export type ReportType = 
     | 'Falta de Energia' 
-    | 'Poste Danificado' 
-    | 'Fiação Exposta' 
-    | 'Lâmpada Queimada' 
+    | 'Oscilação de Energia'
+    | 'Incêndio' 
+    | 'Poste em Manutenção'
     | 'Outros';
 
 export interface ReportLocation {
@@ -17,15 +17,23 @@ export interface ReportLocation {
     longitude: number;
 }
 
+export interface ReportUser {
+    id: string;
+    name: string;
+    email: string;
+}
+
 export interface ReportDetail {
     id: string;
     title: string;
     description: string;
-    type: ReportType | string;
+    img?: string | null;
+    option: string;
     status: ReportStatus;
     location: ReportLocation;
     createdAt: string;
     updatedAt: string;
+    user: ReportUser;
     isOwn?: boolean;
 }
 

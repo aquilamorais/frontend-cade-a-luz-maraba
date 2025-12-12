@@ -2,22 +2,22 @@ import { ReportDetailsInfoProps, StatusColorMap, StatusLabelMap, TypeColorMap } 
 
 function ReportDetailsInfo({ report }: ReportDetailsInfoProps){
     const statusColors: StatusColorMap = {
-        'resolved': 'bg-green-100 text-green-700 border-green-300',
-        'in_progress': 'bg-yellow-100 text-yellow-700 border-yellow-300',
-        'open': 'bg-red-100 text-red-700 border-red-300'
+        'RESOLVIDO': 'bg-green-100 text-green-700 border-green-300',
+        'EM_ANDAMENTO': 'bg-yellow-100 text-yellow-700 border-yellow-300',
+        'ABERTO': 'bg-red-100 text-red-700 border-red-300'
     };
 
     const statusLabels: StatusLabelMap = {
-        'resolved': 'Resolvida',
-        'in_progress': 'Em Andamento',
-        'open': 'Em Aberto'
+        'RESOLVIDO': 'Resolvida',
+        'EM_ANDAMENTO': 'Em Andamento',
+        'ABERTO': 'Em Aberto'
     };
 
     const typeColors: TypeColorMap = {
         'Falta de Energia': 'bg-red-50 text-red-600',
-        'Poste Danificado': 'bg-orange-50 text-orange-600',
-        'Fiação Exposta': 'bg-yellow-50 text-yellow-600',
-        'Lâmpada Queimada': 'bg-blue-50 text-blue-600',
+        'Oscilação de Energia': 'bg-orange-50 text-orange-600',
+        'Incêndio': 'bg-yellow-50 text-yellow-600',
+        'Poste em Manutenção': 'bg-blue-50 text-blue-600',
         'Outros': 'bg-gray-50 text-gray-600'
     };
 
@@ -26,8 +26,8 @@ function ReportDetailsInfo({ report }: ReportDetailsInfoProps){
             <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${typeColors[report.type] || 'bg-gray-50 text-gray-600'}`}>
-                            {report.type}
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${typeColors[report.option] || 'bg-gray-50 text-gray-600'}`}>
+                            {report.option}
                         </span>
                         <span className={`px-3 py-1 rounded-full text-xs font-bold border-2 ${statusColors[report.status]}`}>
                             {statusLabels[report.status]}
@@ -50,6 +50,18 @@ function ReportDetailsInfo({ report }: ReportDetailsInfoProps){
                     {report.description}
                 </p>
 
+                {report.img && (
+                    <div className="mb-4">
+                        <h3 className="text-sm font-semibold text-gray-600 mb-2">Imagem</h3>
+                        <img 
+                            src={report.img} 
+                            alt="Imagem da denúncia" 
+                            className="max-w-full h-auto rounded-lg border border-gray-200"
+                            style={{ maxHeight: '300px' }}
+                        />
+                    </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <div className="flex flex-col gap-2">
                         <h3 className="text-sm font-semibold text-gray-600">📍 Localização</h3>
@@ -60,6 +72,12 @@ function ReportDetailsInfo({ report }: ReportDetailsInfoProps){
                         {report.location.cep && (
                             <p className="text-sm text-gray-600">CEP: {report.location.cep}</p>
                         )}
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <h3 className="text-sm font-semibold text-gray-600">Reportado por</h3>
+                        <p className="text-gray-800">{report.user.name}</p>
+                        <p className="text-sm text-gray-600">{report.user.email}</p>
                     </div>
 
                     <div className="flex flex-col gap-2">

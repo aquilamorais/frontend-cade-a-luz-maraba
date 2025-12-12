@@ -5,89 +5,136 @@ import ReportDetailsInfo from '../../components/ReportDetails/ReportDetailsInfo'
 import ReportDetailsMap from '../../components/ReportDetails/ReportDetailsMap';
 import ReportDetailsActions from '../../components/ReportDetails/ReportDetailsActions';
 import CreateReportHeader from '../../components/CreateReport/CreateReportHeader';
-import { ReportDetails as ReportDetailsType, ReportComment } from './Types';
+import { ReportDetails as ReportDetailsType } from './Types';
+import { api } from '../../services/api.tsx';
+
+interface ApiComplaint {
+    id: string;
+    title: string;
+    description: string;
+    img?: string | null;
+    address: string;
+    neighborhood: string;
+    latitude?: number | null;
+    longitude?: number | null;
+    hour: string;
+    createAt: string;
+    updateAt: string;
+    option: string;
+    status: 'ABERTO' | 'EM_ANDAMENTO' | 'RESOLVIDO';
+    userId: string;
+    user: {
+        id: string;
+        name: string;
+        email: string;
+    };
+}
+
+const optionLabels: Record<string, string> = {
+    'FALTOUENERGIA': 'Falta de Energia',
+    'OSCILACAO': 'Oscilação de Energia',
+    'INCENDIO': 'Incêndio',
+    'MANUTENCAO': 'Poste em Manutenção'
+};
 
 function ReportDetails() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [report, setReport] = useState<ReportDetailsType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const mockReport: ReportDetailsType = {
-            id: id || '',
-            title: 'Falta de energia na Rua das Flores',
-            description: 'Estamos sem energia há mais de 3 horas. O problema começou por volta das 14:30. Toda a rua está afetada e já tentamos contato com a companhia de energia.',
-            type: 'Falta de Energia',
-            status: 'in_progress',
-            location: {
-                address: 'Rua das Flores, 123',
-                neighborhood: 'Centro',
-                city: 'Marabá',
-                state: 'PA',
-                cep: '68500-000',
-                latitude: -5.3686,
-                longitude: -49.1178
-            },
-            createdAt: '25/11/2025 14:30',
-            updatedAt: '26/11/2025 10:15',
-            user: {
-                name: 'João Silva',
-                email: 'joao.silva@email.com'
-            },
-            isOwn: true,
-            comments: [
-                {
-                    id: 1,
-                    author: 'Admin Sistema',
-                    text: 'Denúncia recebida. Equipe técnica foi acionada.',
-                    date: '25/11/2025 15:00',
-                    isAdmin: true
-                },
-                {
-                    id: 2,
-                    author: 'João Silva',
-                    text: 'Obrigado pelo retorno. Aguardando solução.',
-                    date: '25/11/2025 15:30',
-                    isAdmin: false
+        const fetchReport = async () => {
+            if (!id) {
+                setError('ID da denúncia não informado');
+                setLoading(false);
+                return;
+            }
+
+            try {
+                setLoading(true);
+                const response = await api.get(`/complaints/${id}`);
+                const data = response.data as ApiComplaint;
+
+                const token = localStorage.getItem('token');
+                let currentUserId = '';
+                if (token) {
+                    try {
+                        const payload = JSON.parse(atob(token.split('.')[1]));
+                        currentUserId = payload.id;
+                    } catch (e) {
+                        console.error('Erro ao decodificar token:', e);
+                    }
                 }
-            ]
+
+                const formatDate = (dateString: string) => {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                };
+
+                const reportDetails: ReportDetailsType = {
+                    id: data.id,
+                    title: data.title,
+                    description: data.description,
+                    img: data.img,
+                    option: optionLabels[data.option] || data.option,
+                    status: data.status,
+                    location: {
+                        address: data.address,
+                        neighborhood: data.neighborhood,
+                        city: 'Marabá',
+                        state: 'PA',
+                        latitude: data.latitude || -5.3686,
+                        longitude: data.longitude || -49.1178
+                    },
+                    createdAt: formatDate(data.createAt),
+                    updatedAt: formatDate(data.updateAt),
+                    user: {
+                        id: data.user.id,
+                        name: data.user.name,
+                        email: data.user.email
+                    },
+                    isOwn: data.userId === currentUserId,
+                    comments: []
+                };
+
+                setReport(reportDetails);
+                setError(null);
+            } catch (err: any) {
+                console.error('Erro ao buscar denúncia:', err);
+                setError(err.response?.status === 404 
+                    ? 'Denúncia não encontrada' 
+                    : 'Erro ao carregar denúncia');
+            } finally {
+                setLoading(false);
+            }
         };
 
-        setTimeout(() => {
-            setReport(mockReport);
-            setLoading(false);
-        }, 500);
+        fetchReport();
     }, [id]);
 
-    const handleDelete = (): void => {
+    const handleDelete = async (): Promise<void> => {
         if (window.confirm('Tem certeza que deseja excluir esta denúncia?')) {
-            console.log('Deletando denúncia:', id);
-            navigate('/home');
+            try {
+                await api.delete(`/complaints/${id}`);
+                alert('Denúncia excluída com sucesso!');
+                navigate('/home');
+            } catch (err: any) {
+                console.error('Erro ao excluir denúncia:', err);
+                alert('Erro ao excluir denúncia. Tente novamente.');
+            }
         }
     };
 
     const handleEdit = (): void => {
         navigate(`/edit-report/${id}`);
-    };
-
-    const handleAddComment = (commentText: string): void => {
-        if (!report) return;
-
-        console.log('Novo comentário:', commentText);
-
-        const newComment: ReportComment = {
-            id: report.comments.length + 1,
-            author: report.user.name,
-            text: commentText,
-            date: new Date().toLocaleString('pt-BR'),
-            isAdmin: false
-        };
-
-        setReport({
-            ...report,
-            comments: [...report.comments, newComment]
-        });
     };
 
     if (loading) {

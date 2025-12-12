@@ -1,16 +1,17 @@
-export type ReportStatus = 'open' | 'in_progress' | 'resolved';
+export type ReportStatus = 'ABERTO' | 'EM_ANDAMENTO' | 'RESOLVIDO';
 
 export interface ReportLocation {
     address: string;
     neighborhood: string;
     city: string;
     state: string;
-    cep: string;
+    cep?: string;
     latitude: number;
     longitude: number;
 }
 
 export interface ReportUser {
+    id: string;
     name: string;
     email: string;
 }
@@ -27,7 +28,8 @@ export interface ReportDetails {
     id: string;
     title: string;
     description: string;
-    type: string;
+    img?: string | null;
+    option: string;
     status: ReportStatus;
     location: ReportLocation;
     createdAt: string;
