@@ -5,19 +5,30 @@ function ReportCard({ report, isOwn = false }: ReportCardProps) {
     const navigate = useNavigate();
 
     const statusColors: Record<ReportStatus, string> = {
-        'resolved': 'bg-green-100 text-green-700 border-green-300',
-        'in_progress': 'bg-yellow-100 text-yellow-700 border-yellow-300',
-        'open': 'bg-red-100 text-red-700 border-red-300'
+        'RESOLVIDO': 'bg-green-100 text-green-700 border-green-300',
+        'EM_ANDAMENTO': 'bg-yellow-100 text-yellow-700 border-yellow-300',
+        'ABERTO': 'bg-red-100 text-red-700 border-red-300'
     };
 
     const statusLabels: Record<ReportStatus, string> = {
-        'resolved': 'Resolvida',
-        'in_progress': 'Em Andamento',
-        'open': 'Em Aberto'
+        'RESOLVIDO': 'Resolvida',
+        'EM_ANDAMENTO': 'Em Andamento',
+        'ABERTO': 'Em Aberto'
     };
 
     const handleClick = (): void => {
         navigate(`/report/${report.id}`);
+    };
+
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
     };
 
     return (
@@ -29,16 +40,16 @@ function ReportCard({ report, isOwn = false }: ReportCardProps) {
                 <div className="flex-1">
                     <h4 className="font-semibold text-gray-800 mb-1">{report.title}</h4>
                     <p className="text-sm text-gray-600 mb-2">{report.description}</p>
-                    <p className="text-xs text-gray-500">📍 {report.location}</p>
+                    <p className="text-xs text-gray-500">📍 {report.address} - {report.neighborhood}</p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-xs font-bold border-2 ${statusColors[report.status]} whitespace-nowrap ml-2`}>
                     {statusLabels[report.status]}
                 </span>
             </div>
             <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-gray-200">
-                <span> {report.date}</span>
+                <span>{formatDate(report.createAt)}</span>
                 {isOwn && <span className="font-semibold text-blue-600">Sua denúncia</span>}
-                {!isOwn && <span> {report.user}</span>}
+                {!isOwn && <span>{report.user.name}</span>}
             </div>
         </div>
     );

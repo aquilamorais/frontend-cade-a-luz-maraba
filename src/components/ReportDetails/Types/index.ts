@@ -1,4 +1,3 @@
-// Common Types
 export type ReportStatus = 'resolved' | 'in_progress' | 'open';
 
 export type ReportType = 
@@ -8,7 +7,6 @@ export type ReportType =
     | 'Lâmpada Queimada' 
     | 'Outros';
 
-// Location Types
 export interface ReportLocation {
     address: string;
     neighborhood: string;
@@ -19,7 +17,6 @@ export interface ReportLocation {
     longitude: number;
 }
 
-// Report Types
 export interface ReportDetail {
     id: string;
     title: string;
@@ -32,23 +29,19 @@ export interface ReportDetail {
     isOwn?: boolean;
 }
 
-// ReportDetailsActions Types
 export interface ReportDetailsActionsProps {
     onEdit: () => void;
     onDelete: () => void;
 }
 
-// ReportDetailsInfo Types
 export interface ReportDetailsInfoProps {
     report: ReportDetail;
 }
 
-// ReportDetailsMap Types
 export interface ReportDetailsMapProps {
     location: ReportLocation;
 }
 
-// Status and Type color mappings
 export type StatusColorMap = Record<ReportStatus, string>;
 export type StatusLabelMap = Record<ReportStatus, string>;
 export type TypeColorMap = Record<string, string>;

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import MapView from '../../components/Home/MapView';
 import QuickActions from '../../components/Home/QuickActions';
@@ -7,68 +8,62 @@ import MyReportsList from '../../components/Home/MyReportsList';
 import AllReportsList from '../../components/Home/AllReportsList';
 import HomeHeader from '../../components/Home/HomeHeader';
 import { Stats, Report } from './Types';
+import { api } from '../../services/api.tsx';
 
 function Home() {
     const navigate = useNavigate();
+    const [allReports, setAllReports] = useState<Report[]>([]);
+    const [myReports, setMyReports] = useState<Report[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const stats: Stats = {
-        resolved: 45,
-        inProgress: 12,
-        open: 8,
-        total: 65,
-        pending: 20
-    };
+    const [stats, setStats] = useState<Stats>({
+        resolved: 0,
+        inProgress: 0,
+        open: 0,
+        total: 0,
+        pending: 0
+    });
 
-    const myReports: Report[] = [
-        {
-            id: 1,
-            title: 'Falta de energia na Rua das Flores',
-            description: 'Sem energia há 3 horas',
-            location: 'Rua das Flores, 123',
-            status: 'in_progress',
-            date: '25/11/2025 14:30',
-            user: 'João Silva'
-        },
-        {
-            id: 2,
-            title: 'Poste queimado',
-            description: 'Poste da esquina está com problemas',
-            location: 'Av. Principal, 456',
-            status: 'resolved',
-            date: '20/11/2025 10:15',
-            user: 'João Silva'
-        }
-    ];
+    useEffect(() => {
+        const fetchComplaints = async () => {
+            try {
+                setLoading(true);
+                setError(null);
 
-    const allReports: Report[] = [
-        {
-            id: 3,
-            title: 'Transformador com problema',
-            description: 'Fazendo barulho estranho',
-            location: 'Rua São João, 789',
-            status: 'open',
-            date: '26/11/2025 08:00',
-            user: 'Maria Santos'
-        },
-        {
-            id: 4,
-            title: 'Iluminação pública apagada',
-            description: 'Toda a rua está sem iluminação',
-            location: 'Rua do Comércio, 321',
-            status: 'in_progress',
-            date: '25/11/2025 19:45',
-            user: 'Pedro Oliveira'
-        },
-        {
-            id: 5,
-            title: 'Cabo solto',
-            description: 'Cabo de energia solto e perigoso',
-            location: 'Travessa A, 555',
-            status: 'resolved',
-            date: '24/11/2025 16:20',
-            user: 'Ana Costa'
-        }
-    ];
+                const [allResponse, myResponse] = await Promise.all([
+                    api.get('/complaints'),
+                    api.get('/complaints/my')
+                ]);
+
+                const allData = allResponse.data as Report[];
+                const myData = myResponse.data as Report[];
+
+                setAllReports(allData);
+                setMyReports(myData);
+
+                const resolved = allData.filter(r => r.status === 'RESOLVIDO').length;
+                const inProgress = allData.filter(r => r.status === 'EM_ANDAMENTO').length;
+                const open = allData.filter(r => r.status === 'ABERTO').length;
+
+                setStats({
+                    resolved,
+                    inProgress,
+                    open,
+                    total: allData.length,
+                    pending: open + inProgress
+                });
+
+            } catch (err) {
+                console.error('Erro ao buscar denúncias:', err);
+                setError('Erro ao carregar denúncias. Tente novamente.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchComplaints();
+    }, []);
 
     const handleNewReport = () => {
         navigate('/create-report');
@@ -111,11 +106,26 @@ function Home() {
                         <MapView />
                     </div>
 
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                        <MyReportsList reports={myReports} />
-                        <AllReportsList reports={allReports} />
-                    </div>
+                    {loading ? (
+                        <div className="flex justify-center items-center py-12">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-(--color-primary)"></div>
+                        </div>
+                    ) : error ? (
+                        <div className="text-center py-12">
+                            <p className="text-red-500">{error}</p>
+                            <button 
+                                onClick={() => window.location.reload()} 
+                                className="mt-4 px-4 py-2 bg-(--color-primary) text-white rounded-lg hover:opacity-90"
+                            >
+                                Tentar novamente
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                            <MyReportsList reports={myReports} />
+                            <AllReportsList reports={allReports} />
+                        </div>
+                    )}
                 </div>
             </main>
             <Footer />

@@ -1,13 +1,20 @@
-export type ReportStatus = 'open' | 'in_progress' | 'resolved';
+export type ReportStatus = 'ABERTO' | 'EM_ANDAMENTO' | 'RESOLVIDO';
 
 export interface Report {
-    id: number;
+    id: string;
     title: string;
     description: string;
-    location: string;
+    address: string;
+    neighborhood: string;
     status: ReportStatus;
-    date: string;
-    user: string;
+    hour: string;
+    createAt: string;
+    option: string;
+    img?: string | null;
+    user: {
+        name: string;
+        email: string;
+    };
 }
 
 export interface Stats {
