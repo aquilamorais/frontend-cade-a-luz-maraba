@@ -1,6 +1,11 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon } from 'leaflet';
+import { Icon, LatLngBounds } from 'leaflet';
 import { Report } from './Types';
+
+const marabaBounds = new LatLngBounds(
+    [-5.55, -49.35],
+    [-5.15, -48.95]
+);
 
 const defaultIcon = new Icon({
     iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -45,6 +50,10 @@ function MapView({ reports = [] }: MapViewProps) {
                 <MapContainer
                     center={defaultCenter}
                     zoom={12}
+                    minZoom={11}
+                    maxZoom={18}
+                    maxBounds={marabaBounds}
+                    maxBoundsViscosity={1.0}
                     scrollWheelZoom={true}
                     style={{ height: '100%', width: '100%' }}
                 >

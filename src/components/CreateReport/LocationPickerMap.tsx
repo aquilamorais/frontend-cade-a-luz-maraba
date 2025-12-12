@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
-import { Icon, LatLng } from 'leaflet';
+import { Icon, LatLng, LatLngBounds } from 'leaflet';
+
+const marabaBounds = new LatLngBounds(
+    [-5.55, -49.35],
+    [-5.15, -48.95]
+);
 
 const defaultIcon = new Icon({
     iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -12,21 +17,64 @@ const defaultIcon = new Icon({
     shadowSize: [41, 41]
 });
 
+export interface AddressData {
+    endereco: string;
+    bairro: string;
+    cep: string;
+}
+
 interface LocationPickerMapProps {
-    onLocationSelect: (lat: number, lng: number) => void;
+    onLocationSelect: (lat: number, lng: number, address?: AddressData) => void;
     initialLat?: number;
     initialLng?: number;
 }
 
-function LocationMarker({ onLocationSelect, position, setPosition }: {
-    onLocationSelect: (lat: number, lng: number) => void;
+async function reverseGeocode(lat: number, lng: number): Promise<AddressData | null> {
+    try {
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`,
+            {
+                headers: {
+                    'Accept-Language': 'pt-BR',
+                    'User-Agent': 'CadeALuzMaraba/1.0'
+                }
+            }
+        );
+        
+        if (!response.ok) return null;
+        
+        const data = await response.json();
+        const address = data.address || {};
+        
+        const road = address.road || address.street || address.pedestrian || '';
+        const houseNumber = address.house_number || '';
+        const endereco = houseNumber ? `${road}, ${houseNumber}` : road;
+        
+        const bairro = address.suburb || address.neighbourhood || address.district || address.city_district || '';
+        const cep = address.postcode || '';
+        
+        return { endereco, bairro, cep };
+    } catch (error) {
+        console.error('Erro na geocodificação reversa:', error);
+        return null;
+    }
+}
+
+function LocationMarker({ onLocationSelect, position, setPosition, setLoading }: {
+    onLocationSelect: (lat: number, lng: number, address?: AddressData) => void;
     position: LatLng | null;
     setPosition: (pos: LatLng) => void;
+    setLoading: (loading: boolean) => void;
 }) {
     useMapEvents({
-        click(e) {
+        async click(e) {
             setPosition(e.latlng);
-            onLocationSelect(e.latlng.lat, e.latlng.lng);
+            setLoading(true);
+            
+            const addressData = await reverseGeocode(e.latlng.lat, e.latlng.lng);
+            onLocationSelect(e.latlng.lat, e.latlng.lng, addressData || undefined);
+            
+            setLoading(false);
         },
     });
 
@@ -37,6 +85,7 @@ function LocationMarker({ onLocationSelect, position, setPosition }: {
 
 function LocationPickerMap({ onLocationSelect, initialLat, initialLng }: LocationPickerMapProps) {
     const defaultCenter: [number, number] = [-5.3686, -49.1178];
+    const [loading, setLoading] = useState(false);
     
     const [position, setPosition] = useState<LatLng | null>(
         initialLat && initialLng 
@@ -56,12 +105,16 @@ function LocationPickerMap({ onLocationSelect, initialLat, initialLng }: Locatio
                 Marcar no Mapa
             </label>
             <p className="text-xs text-gray-500 mb-2">
-                Clique no mapa para marcar a localização exata
+                Clique no mapa para marcar a localização e preencher o endereço automaticamente
             </p>
             <div className="relative w-full h-[300px] rounded-lg overflow-hidden border-2 border-gray-300">
                 <MapContainer
                     center={position ? [position.lat, position.lng] : defaultCenter}
                     zoom={13}
+                    minZoom={11}
+                    maxZoom={18}
+                    maxBounds={marabaBounds}
+                    maxBoundsViscosity={1.0}
                     scrollWheelZoom={true}
                     style={{ height: '100%', width: '100%' }}
                 >
@@ -73,8 +126,17 @@ function LocationPickerMap({ onLocationSelect, initialLat, initialLng }: Locatio
                         onLocationSelect={onLocationSelect} 
                         position={position}
                         setPosition={setPosition}
+                        setLoading={setLoading}
                     />
                 </MapContainer>
+                {loading && (
+                    <div className="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center z-[1000]">
+                        <div className="flex items-center gap-2">
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-(--color-primary)"></div>
+                            <span className="text-sm text-gray-600">Buscando endereço...</span>
+                        </div>
+                    </div>
+                )}
             </div>
             {position && (
                 <p className="text-xs text-gray-600 mt-1">

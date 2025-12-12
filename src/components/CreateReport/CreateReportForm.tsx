@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { CreateReportFormProps, CreateReportFormData } from './Types';
 import ImageUpload from './ImageUpload';
-import LocationPickerMap from './LocationPickerMap';
+import LocationPickerMap, { AddressData } from './LocationPickerMap';
 
 function CreateReportForm({ onSubmit }: CreateReportFormProps){
     const [formData, setFormData] = useState<CreateReportFormData>({
@@ -23,23 +23,63 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleLocationSelect = (lat: number, lng: number) => {
+    const handleLocationSelect = (lat: number, lng: number, address?: AddressData) => {
         setFormData(prev => ({
             ...prev,
             latitude: lat.toString(),
-            longitude: lng.toString()
+            longitude: lng.toString(),
+            ...(address && {
+                endereco: address.endereco || prev.endereco,
+                bairro: address.bairro || prev.bairro,
+                cep: address.cep || prev.cep
+            })
         }));
     };
 
     const handleGetLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                (position) => {
+                async (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
                     setFormData(prev => ({
                         ...prev,
-                        latitude: position.coords.latitude.toString(),
-                        longitude: position.coords.longitude.toString()
+                        latitude: lat.toString(),
+                        longitude: lng.toString()
                     }));
+
+                    try {
+                        const response = await fetch(
+                            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`,
+                            {
+                                headers: {
+                                    'Accept-Language': 'pt-BR',
+                                    'User-Agent': 'CadeALuzMaraba/1.0'
+                                }
+                            }
+                        );
+                        
+                        if (response.ok) {
+                            const data = await response.json();
+                            const addr = data.address || {};
+                            
+                            const road = addr.road || addr.street || addr.pedestrian || '';
+                            const houseNumber = addr.house_number || '';
+                            const endereco = houseNumber ? `${road}, ${houseNumber}` : road;
+                            const bairro = addr.suburb || addr.neighbourhood || addr.district || addr.city_district || '';
+                            const cep = addr.postcode || '';
+                            
+                            setFormData(prev => ({
+                                ...prev,
+                                endereco: endereco || prev.endereco,
+                                bairro: bairro || prev.bairro,
+                                cep: cep
+                            }));
+                        }
+                    } catch (error) {
+                        console.error('Erro ao buscar endereço:', error);
+                    }
                 },
                 (error) => {
                     console.error('Erro ao obter localização:', error);
