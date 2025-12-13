@@ -6,10 +6,12 @@ import Home from './Pages/Home/Home';
 import CreateReport from './Pages/CreateReport/CreateReport';
 import EditReport from './Pages/EditReport/EditReport';
 import ReportDetails from './Pages/ReportDetails/ReportDetails';
+import Admin from './Pages/Admin/Admin';
 
 function App() {
   return (
     <Routes>
+      <Route path="/admin" element={<Admin />} />
       <Route path="/report/:id" element={<ReportDetails />} />
       <Route path="/edit-report/:id" element={<EditReport />} />
       <Route path="/create-report" element={<CreateReport />} />

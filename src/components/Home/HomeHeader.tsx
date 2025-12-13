@@ -1,11 +1,31 @@
 import { Link, useNavigate } from 'react-router';
+import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import logo from '../../assets/logo.png';
 import logo2 from '../../assets/logo2.png';
 import user from '../../assets/nome.png';
 import sair from '../../assets/sair.png';
 
+interface JwtPayload {
+    id: string;
+    role: string;
+}
+
 function HomeHeader() {
     const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decoded = jwtDecode<JwtPayload>(token);
+                setIsAdmin(decoded.role === 'ADMIN');
+            } catch {
+                setIsAdmin(false);
+            }
+        }
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -23,6 +43,14 @@ function HomeHeader() {
                 <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Sobre</button>
                 <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Contatos</button>
                 <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Ajuda</button>
+                {isAdmin && (
+                    <Link 
+                        to="/admin"
+                        className="px-5 py-2.5 bg-(--color-primary) text-white font-semibold rounded-md hover:opacity-90 transition-opacity"
+                    >
+                        Admin
+                    </Link>
+                )}
                 <div className="flex flex-row justify-center items-center gap-4 w-26">
                     <Link to="/user" className='flex flex-col justify-center items-center py-2.5 w-1/2 border-none font-bold rounded-md bg-(--color-tertiary cursor-pointer hover:bg-(--gray-light) focus:outline-none focus:ring-2 focus:ring-(--gray-light) focus:ring-offset-2 transition-all mt-2'>
                         <img src={user} alt="" style={{ width: '60%', height: '60%' }} />
