@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Footer from '../../components/Footer';
 import MapView from '../../components/Home/MapView';
 import QuickActions from '../../components/Home/QuickActions';
@@ -25,45 +25,45 @@ function Home() {
         pending: 0
     });
 
-    useEffect(() => {
-        const fetchComplaints = async () => {
-            try {
-                setLoading(true);
-                setError(null);
+    const fetchComplaints = useCallback(async () => {
+        try {
+            setLoading(true);
+            setError(null);
 
-                const [allResponse, myResponse] = await Promise.all([
-                    api.get('/complaints'),
-                    api.get('/complaints/my')
-                ]);
+            const [allResponse, myResponse] = await Promise.all([
+                api.get('/complaints'),
+                api.get('/complaints/my')
+            ]);
 
-                const allData = allResponse.data as Report[];
-                const myData = myResponse.data as Report[];
+            const allData = allResponse.data as Report[];
+            const myData = myResponse.data as Report[];
 
-                setAllReports(allData);
-                setMyReports(myData);
+            setAllReports(allData);
+            setMyReports(myData);
 
-                const resolved = allData.filter(r => r.status === 'RESOLVIDO').length;
-                const inProgress = allData.filter(r => r.status === 'EM_ANDAMENTO').length;
-                const open = allData.filter(r => r.status === 'ABERTO').length;
+            const resolved = allData.filter(r => r.status === 'RESOLVIDO').length;
+            const inProgress = allData.filter(r => r.status === 'EM_ANDAMENTO').length;
+            const open = allData.filter(r => r.status === 'ABERTO').length;
 
-                setStats({
-                    resolved,
-                    inProgress,
-                    open,
-                    total: allData.length,
-                    pending: open + inProgress
-                });
+            setStats({
+                resolved,
+                inProgress,
+                open,
+                total: allData.length,
+                pending: open + inProgress
+            });
 
-            } catch (err) {
-                console.error('Erro ao buscar denúncias:', err);
-                setError('Erro ao carregar denúncias. Tente novamente.');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchComplaints();
+        } catch (err) {
+            console.error('Erro ao buscar denúncias:', err);
+            setError('Erro ao carregar denúncias. Tente novamente.');
+        } finally {
+            setLoading(false);
+        }
     }, []);
+
+    useEffect(() => {
+        fetchComplaints();
+    }, [fetchComplaints]);
 
     const handleNewReport = () => {
         navigate('/create-report');
@@ -73,19 +73,32 @@ function Home() {
         navigate('/user');
     };
 
+    const handleRefresh = () => {
+        fetchComplaints();
+    };
+
     return (
         <>
             <HomeHeader />
             <main className="min-h-screen bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 py-8">
 
-                    <div className="mb-8">
-                        <h1 className="text-4xl font-bold text-(--color-primary) mb-2">
-                            Bem-vindo!
-                        </h1>
-                        <p className="text-gray-600">
-                            Acompanhe e gerencie suas denúncias de falta de energia
-                        </p>
+                    <div className="mb-8 flex justify-between items-start">
+                        <div>
+                            <h1 className="text-4xl font-bold text-(--color-primary) mb-2">
+                                Bem-vindo!
+                            </h1>
+                            <p className="text-gray-600">
+                                Acompanhe e gerencie suas denúncias de falta de energia
+                            </p>
+                        </div>
+                        <button
+                            onClick={handleRefresh}
+                            disabled={loading}
+                            className="px-4 py-2 bg-(--color-secondary) text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
+                        >
+                            Atualizar
+                        </button>
                     </div>
 
 
