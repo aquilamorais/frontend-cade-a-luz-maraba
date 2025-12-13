@@ -10,10 +10,10 @@ interface AdminReportCardProps {
     onResolve: (reportId: string) => void;
 }
 
-const statusColors: Record<string, string> = {
-    'ABERTO': '#EF4444',
-    'EM_ANDAMENTO': '#F59E0B',
-    'RESOLVIDO': '#10B981'
+const statusConfig: Record<string, { bg: string; text: string; border: string }> = {
+    'ABERTO': { bg: 'bg-red-50', text: 'text-red-600', border: 'border-red-200' },
+    'EM_ANDAMENTO': { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200' },
+    'RESOLVIDO': { bg: 'bg-green-50', text: 'text-green-600', border: 'border-green-200' }
 };
 
 const statusLabels: Record<string, string> = {
@@ -31,68 +31,51 @@ const optionLabels: Record<string, string> = {
 
 function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCardProps) {
     const isResolved = report.status === 'RESOLVIDO';
+    const config = statusConfig[report.status];
 
     return (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-start justify-between">
-                <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                        <h3 className="font-semibold text-gray-800">{report.title}</h3>
-                        <span 
-                            className="px-2 py-0.5 text-xs font-bold rounded"
-                            style={{ 
-                                backgroundColor: `${statusColors[report.status]}20`,
-                                color: statusColors[report.status]
-                            }}
-                        >
+        <div className={`bg-white rounded-lg border ${config.border} p-5`}>
+            <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-3">
+                        <h3 className="font-bold text-gray-800 truncate">{report.title}</h3>
+                        <span className={`px-3 py-1 text-xs font-bold rounded-lg ${config.bg} ${config.text}`}>
                             {statusLabels[report.status]}
                         </span>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2 line-clamp-2">{report.description}</p>
-                    <div className="flex flex-wrap gap-2 text-xs text-gray-500">
-                        <span>📍 {report.address}</span>
-                        <span>•</span>
-                        <span>{optionLabels[report.option] || report.option}</span>
-                        <span>•</span>
+                    <p className="text-sm text-gray-500 mb-3 line-clamp-2">{report.description}</p>
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-400">
+                        <span>{report.address}</span>
+                        <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                        <span className="px-2 py-1 bg-gray-100 rounded-md">{optionLabels[report.option] || report.option}</span>
+                        <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
                         <span>{report.user?.name || 'Desconhecido'}</span>
                     </div>
                 </div>
-                <div className="flex gap-2 ml-4">
+                <div className="flex items-center gap-2">
                     {!isResolved && (
                         <button
                             onClick={() => onResolve(report.id)}
-                            className="flex flex-row gap-2 justify-center items-center p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-lg text-sm font-medium"
                             title="Marcar como resolvida"
                         >
-                            Marcar como resolvida
-                            <img
-                            src={checkVerde}
-                            alt=""
-                            className="w-4 h-4 opacity-60"
-                            />
+                            <img src={checkVerde} alt="" className="w-4 h-4" />
+                            <span className="hidden sm:inline">Resolver</span>
                         </button>
                     )}
                     <button
                         onClick={() => onEdit(report.id)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        className="p-2.5 bg-blue-50 text-blue-600 rounded-lg"
                         title="Editar denúncia"
                     >
-                        <img
-                            src={editIcon}
-                            alt=""
-                            className="w-4 h-4 opacity-60"
-                        />
+                        <img src={editIcon} alt="" className="w-4 h-4" />
                     </button>
                     <button
                         onClick={() => onDelete(report.id)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-2.5 bg-red-50 text-red-600 rounded-lg"
                         title="Excluir denúncia"
                     >
-                        <img
-                            src={deleteIcon}
-                            alt=""
-                            className="w-4 h-4 opacity-60"
-                        />
+                        <img src={deleteIcon} alt="" className="w-4 h-4" />
                     </button>
                 </div>
             </div>

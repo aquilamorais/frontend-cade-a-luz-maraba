@@ -116,7 +116,7 @@ function Admin() {
 
     const handleResolveReport = async (reportId: string) => {
         try {
-            await api.put(`/complaints/${reportId}`, { status: 'RESOLVIDO' });
+            await api.patch(`/complaints/${reportId}`, { status: 'RESOLVIDO' });
             setReports(reports.map(r => 
                 r.id === reportId ? { ...r, status: 'RESOLVIDO' } : r
             ));
@@ -154,8 +154,8 @@ function Admin() {
                 <AdminHeader />
                 <main className="min-h-screen flex items-center justify-center bg-gray-50">
                     <div className="flex flex-col items-center gap-4">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-(--color-primary)"></div>
-                        <p className="text-gray-600">Carregando dados...</p>
+                        <div className="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin"></div>
+                        <p className="text-gray-600 font-medium">Carregando dados...</p>
                     </div>
                 </main>
                 <Footer />
@@ -168,11 +168,11 @@ function Admin() {
             <>
                 <AdminHeader />
                 <main className="min-h-screen flex items-center justify-center bg-gray-50">
-                    <div className="text-center">
-                        <p className="text-red-500 mb-4">{error}</p>
+                    <div className="text-center bg-white p-8 rounded-lg shadow">
+                        <p className="text-red-500 mb-4 font-medium">{error}</p>
                         <button
                             onClick={fetchData}
-                            className="px-6 py-2 bg-(--color-primary) text-white rounded-lg hover:opacity-90"
+                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium"
                         >
                             Tentar novamente
                         </button>
@@ -188,32 +188,32 @@ function Admin() {
             <AdminHeader />
             <main className="min-h-screen bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 py-8">
-                    <div className="mb-8">
-                        <h1 className="text-4xl font-bold text-(--color-primary) mb-2">
+                    <div className="mb-10">
+                        <h1 className="text-4xl font-bold text-green-700 mb-2">
                             Painel Administrativo
                         </h1>
-                        <p className="text-gray-600">
+                        <p className="text-gray-500">
                             Gerencie usuários e denúncias do sistema
                         </p>
                     </div>
 
-                    <div className="mb-6 flex gap-2">
+                    <div className="mb-8 flex gap-3 p-1.5 bg-white rounded-lg shadow-sm border border-gray-200 w-fit">
                         <button
                             onClick={() => setActiveTab('users')}
-                            className={`px-6 py-3 font-semibold rounded-lg transition-colors ${
+                            className={`px-6 py-3 font-semibold rounded-lg flex items-center gap-2 ${
                                 activeTab === 'users'
-                                    ? 'bg-(--color-secondary) text-white'
-                                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                                    ? 'bg-green-600 text-white'
+                                    : 'text-gray-600'
                             }`}
                         >
                             Usuários ({users.length})
                         </button>
                         <button
                             onClick={() => setActiveTab('reports')}
-                            className={`px-6 py-3 font-semibold rounded-lg transition-colors ${
+                            className={`px-6 py-3 font-semibold rounded-lg flex items-center gap-2 ${
                                 activeTab === 'reports'
-                                    ? 'bg-(--color-secondary) text-white'
-                                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                                    ? 'bg-green-600 text-white'
+                                    : 'text-gray-600'
                             }`}
                         >
                             Denúncias ({reports.length})

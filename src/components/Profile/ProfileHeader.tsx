@@ -5,17 +5,19 @@ import { Link } from 'react-router';
 
 function ProfileHeader() {
     return (
-        <header className="flex flex-row justify-between items-center px-8 py-2 bg-white bg-center">
+        <header className="sticky top-0 z-50 flex flex-row justify-between items-center px-8 py-3 bg-white border-b border-gray-200">
             <div className="flex flex-row justify-center items-center gap-4">
-                <Link to="/home" className="flex flex-row items-center justify-center gap-2 py-2.5 bg-transparent border-none font-medium rounded-xl text-black cursor-pointer hover:text-(--color-secondary) transition-colors focus:bg-gray-300">
-                    <img src={back} alt="" className='w-[15%] h-[15%]' />
-                    <span className='font-medium text-xl'>Voltar</span>
+                <Link to="/home" className="flex flex-row items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 border-none font-bold rounded-lg text-gray-700 cursor-pointer">
+                    <img src={back} alt="" className='w-5 h-5' />
+                    <span className='font-bold text-sm'>Voltar</span>
                 </Link>
             </div>
-            <div className="flex flex-row justify-center items-center gap-2.5">
-                <img style={{ width: '50px', height: '50px' }} src={logo} alt="Logo" />
-                <img style={{ width: '120px', height: '50px' }} src={logo2} alt="Logo2" />
-            </div>
+            <Link to="/home" className="flex flex-row justify-center items-center gap-2">
+                <div className="bg-green-600 p-2 rounded-lg">
+                    <img style={{ width: '40px', height: '40px' }} src={logo} alt="Logo" />
+                </div>
+                <img style={{ width: '110px', height: '45px' }} src={logo2} alt="Logo2" />
+            </Link>
         </header>
     );
 }

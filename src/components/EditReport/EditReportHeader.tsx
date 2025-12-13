@@ -1,18 +1,23 @@
 import { useNavigate } from 'react-router';
+import logo from '../../assets/logo.png';
+import logo2 from '../../assets/logo2.png';
 
 function EditReportHeader() {
     const navigate = useNavigate();
 
     return (
-        <header className="flex justify-between items-center p-4 px-8 bg-(--color-primary)">
-            <h1 
-                className="text-2xl text-white font-bold cursor-pointer hover:opacity-80 transition-opacity"
+        <header className="sticky top-0 z-50 flex justify-between items-center p-4 px-8 bg-green-700">
+            <div 
+                className="flex items-center gap-2 cursor-pointer"
                 onClick={() => navigate('/home')}
             >
-                Cadê a Luz?
-            </h1>
+                <div className="bg-white/20 p-2 rounded-lg">
+                    <img src={logo} alt="Logo" className="h-8" />
+                </div>
+                <img src={logo2} alt="Logo2" className="h-10" />
+            </div>
             <button 
-                className="text-white font-semibold hover:opacity-80 transition-opacity"
+                className="px-5 py-2.5 bg-white/20 text-white font-bold rounded-lg"
                 onClick={() => navigate('/home')}
             >
                 Voltar

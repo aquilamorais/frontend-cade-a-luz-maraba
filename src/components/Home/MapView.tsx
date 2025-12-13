@@ -65,28 +65,35 @@ function MapView({ reports = [] }: MapViewProps) {
     const reportsWithLocation = reports.filter(r => r.latitude && r.longitude);
 
     return (
-        <div className="w-full bg-white rounded-xl shadow-sm overflow-hidden">
-            <div className="bg-(--color-secondary) px-6 py-4">
-                <h2 className="text-2xl font-bold text-white">Mapa de Denúncias</h2>
-                <p className="text-sm text-gray-200 mt-1">
-                    Visualize todas as denúncias na sua região ({reportsWithLocation.length} no mapa)
-                </p>
+        <div className="w-full bg-white rounded-lg overflow-hidden border border-gray-200">
+            <div className="bg-green-700 px-6 py-5">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <h2 className="text-xl font-bold text-white">Mapa de Denúncias</h2>
+                        <p className="text-green-100 text-sm">
+                            Visualize todas as denúncias na sua região
+                        </p>
+                    </div>
+                    <span className="px-4 py-2 bg-white/20 text-white text-sm font-bold rounded-lg">
+                        {reportsWithLocation.length} marcador(es)
+                    </span>
+                </div>
             </div>
             
-            <div className="flex flex-wrap gap-3 px-6 py-3 bg-gray-50 border-b">
-                <span className="text-sm text-gray-600 font-medium">Legenda:</span>
+            <div className="flex flex-wrap items-center gap-4 px-6 py-4 bg-gray-50 border-b border-gray-200">
+                <span className="text-sm text-gray-600 font-semibold">Legenda:</span>
                 {Object.entries(optionLabels).map(([key, label]) => (
-                    <div key={key} className="flex items-center gap-1">
+                    <div key={key} className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg border border-gray-200">
                         <div 
                             className="w-3 h-3 rounded-full" 
                             style={{ backgroundColor: optionColors[key] }}
                         />
-                        <span className="text-xs text-gray-600">{label}</span>
+                        <span className="text-xs text-gray-600 font-medium">{label}</span>
                     </div>
                 ))}
             </div>
 
-            <div className="relative h-[400px] bg-gray-100">
+            <div className="relative h-[450px] bg-gray-100">
                 <MapContainer
                     center={defaultCenter}
                     zoom={12}
@@ -108,23 +115,23 @@ function MapView({ reports = [] }: MapViewProps) {
                             icon={getIconForOption(report.option)}
                         >
                             <Popup>
-                                <div className="min-w-[200px]">
-                                    <div className="flex items-center gap-2 mb-2">
+                                <div className="min-w-[220px] p-1">
+                                    <div className="flex items-center gap-2 mb-3">
                                         <div 
-                                            className="w-3 h-3 rounded-full" 
+                                            className="w-3 h-3 rounded-full shadow-sm" 
                                             style={{ backgroundColor: optionColors[report.option] || '#6B7280' }}
                                         />
-                                        <span className="text-xs font-medium" style={{ color: optionColors[report.option] || '#6B7280' }}>
+                                        <span className="text-xs font-bold" style={{ color: optionColors[report.option] || '#6B7280' }}>
                                             {optionLabels[report.option] || report.option}
                                         </span>
                                     </div>
-                                    <h3 className="font-bold text-gray-800 mb-1">{report.title}</h3>
-                                    <p className="text-sm text-gray-600 mb-2">{report.description}</p>
-                                    <p className="text-xs text-gray-500 mb-2">📍 {report.address}</p>
+                                    <h3 className="font-bold text-gray-800 mb-2 text-base">{report.title}</h3>
+                                    <p className="text-sm text-gray-500 mb-3 line-clamp-2">{report.description}</p>
+                                    <p className="text-xs text-gray-400 mb-3">{report.address}</p>
                                     <span 
-                                        className="inline-block px-2 py-1 text-xs font-bold rounded"
+                                        className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold rounded-lg"
                                         style={{ 
-                                            backgroundColor: `${statusColors[report.status]}20`,
+                                            backgroundColor: `${statusColors[report.status]}15`,
                                             color: statusColors[report.status]
                                         }}
                                     >

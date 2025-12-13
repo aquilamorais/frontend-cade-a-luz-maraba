@@ -9,27 +9,29 @@ function DeleteReportModal({ isOpen, reportTitle, onClose, onConfirm }: DeleteRe
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-xl shadow-xl w-full max-w-sm mx-4 p-6">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg w-full max-w-sm p-8">
                 <div className="text-center">
-                    <div className="text-5xl mb-4">⚠️</div>
+                    <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-lg flex items-center justify-center">
+                        <span className="text-red-600 text-2xl font-bold">!</span>
+                    </div>
                     <h2 className="text-xl font-bold text-gray-800 mb-2">
-                        Confirmar Exclusão
+                        Excluir Denúncia
                     </h2>
-                    <p className="text-gray-600 mb-6">
-                        Tem certeza que deseja excluir a denúncia <strong>"{reportTitle}"</strong>? 
+                    <p className="text-gray-500 mb-6">
+                        Tem certeza que deseja excluir a denúncia <span className="font-bold text-gray-700">"{reportTitle}"</span>? 
                         Esta ação não pode ser desfeita.
                     </p>
                     <div className="flex gap-3">
                         <button
                             onClick={onClose}
-                            className="flex-1 py-2 px-4 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-colors"
+                            className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-lg"
                         >
                             Cancelar
                         </button>
                         <button
                             onClick={onConfirm}
-                            className="flex-1 py-2 px-4 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition-colors"
+                            className="flex-1 py-3 px-4 bg-red-600 text-white font-semibold rounded-lg"
                         >
                             Excluir
                         </button>

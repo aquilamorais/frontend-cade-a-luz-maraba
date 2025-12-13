@@ -101,13 +101,13 @@ function LocationPickerMap({ onLocationSelect, initialLat, initialLng }: Locatio
 
     return (
         <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-bold text-gray-700">
                 Marcar no Mapa
             </label>
             <p className="text-xs text-gray-500 mb-2">
                 Clique no mapa para marcar a localização e preencher o endereço automaticamente
             </p>
-            <div className="relative w-full h-[300px] rounded-lg overflow-hidden border-2 border-gray-300">
+            <div className="relative w-full h-[300px] rounded-lg overflow-hidden border border-gray-200">
                 <MapContainer
                     center={position ? [position.lat, position.lng] : defaultCenter}
                     zoom={13}
@@ -130,19 +130,21 @@ function LocationPickerMap({ onLocationSelect, initialLat, initialLng }: Locatio
                     />
                 </MapContainer>
                 {loading && (
-                    <div className="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center z-[1000]">
-                        <div className="flex items-center gap-2">
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-(--color-primary)"></div>
-                            <span className="text-sm text-gray-600">Buscando endereço...</span>
+                    <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-[1000]">
+                        <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-gray-200">
+                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-green-500 border-t-transparent"></div>
+                            <span className="text-sm text-gray-700 font-medium">Buscando endereço...</span>
                         </div>
                     </div>
                 )}
             </div>
             {position && (
-                <p className="text-xs text-gray-600 mt-1">
-                    <span className="font-semibold">Coordenadas selecionadas:</span>{' '}
-                    Lat: {position.lat.toFixed(6)}, Long: {position.lng.toFixed(6)}
-                </p>
+                <div className="flex items-center gap-2 px-3 py-2 bg-green-50 rounded-lg border border-green-200 mt-1">
+                    <p className="text-xs text-green-700">
+                        <span className="font-bold">Coordenadas:</span>{' '}
+                        {position.lat.toFixed(6)}, {position.lng.toFixed(6)}
+                    </p>
+                </div>
             )}
         </div>
     );

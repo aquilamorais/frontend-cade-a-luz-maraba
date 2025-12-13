@@ -141,10 +141,10 @@ function ReportDetails() {
         return (
             <>
                 <CreateReportHeader />
-                <main className="min-h-screen flex items-center justify-center">
+                <main className="min-h-screen flex items-center justify-center bg-gray-100">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-(--color-secondary) mx-auto mb-4"></div>
-                        <p className="text-gray-600">Carregando detalhes...</p>
+                        <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p className="text-gray-600 font-bold">Carregando detalhes...</p>
                     </div>
                 </main>
                 <Footer />
@@ -156,12 +156,15 @@ function ReportDetails() {
         return (
             <>
                 <CreateReportHeader />
-                <main className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                        <p className="text-gray-600 mb-4">Denúncia não encontrada</p>
+                <main className="min-h-screen flex items-center justify-center bg-gray-100">
+                    <div className="text-center p-8 bg-white rounded-lg shadow">
+                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <span className="text-gray-500 text-2xl font-bold">?</span>
+                        </div>
+                        <p className="text-gray-700 mb-4 font-bold text-lg">Denúncia não encontrada</p>
                         <button
                             onClick={() => navigate('/home')}
-                            className="px-6 py-2 bg-(--color-secondary) text-white rounded-lg hover:bg-(--color-primary) transition-colors"
+                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-bold"
                         >
                             Voltar para Home
                         </button>
@@ -175,7 +178,7 @@ function ReportDetails() {
     return (
         <>
             <CreateReportHeader />
-            <main className="min-h-screen bg-gray-50">
+            <main className="min-h-screen bg-gray-100">
                 <div className="max-w-5xl mx-auto px-4 py-8">
                     <ReportDetailsInfo report={report} />
 

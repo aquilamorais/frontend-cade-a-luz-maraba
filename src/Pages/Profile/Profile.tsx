@@ -122,8 +122,11 @@ function Profile() {
         return (
             <>
                 <ProfileHeader />
-                <main className="h-screen flex items-center justify-center">
-                    <p>Carregando...</p>
+                <main className="h-screen flex items-center justify-center bg-green-700">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-white font-bold">Carregando...</p>
+                    </div>
                 </main>
                 <Footer />
             </>
@@ -133,9 +136,9 @@ function Profile() {
     return (
         <>
             <ProfileHeader />
-            <main className="h-screen flex flex-col">
-                <div className="flex flex-col gap-4 bg-(--color-secondary) py-8 px-4">
-                    <div className="flex flex-col items-center w-full gap-4">
+            <main className="min-h-screen flex flex-col">
+                <div className="flex flex-col gap-4 bg-green-700 py-10 px-4">
+                    <div className="flex flex-col items-center w-full gap-6">
                         <ProfileTitle
                             title="Gerencie seu perfil"
                             subtitle="Mantenha seus dados atualizados para receber notificações e acompanhar suas denúncias."
@@ -148,31 +151,31 @@ function Profile() {
 
             {showDeleteModal && (
                 <div 
-                    className={`fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-opacity duration-200 ${isModalClosing ? 'opacity-0' : 'opacity-100'}`}
+                    className={`fixed inset-0 bg-black/60 flex items-center justify-center z-50 ${isModalClosing ? 'opacity-0' : 'opacity-100'}`}
                     onClick={closeModal}
                 >
                     <div 
-                        className={`bg-white rounded-xl p-6 w-full max-w-md mx-4 shadow-2xl transition-all duration-200 ${isModalClosing ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}
+                        className={`bg-white rounded-lg p-8 w-full max-w-md mx-4 shadow-lg ${isModalClosing ? 'opacity-0' : 'opacity-100'}`}
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex flex-col items-center text-center gap-4">
-                            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
-                                <span className="text-3xl">⚠️</span>
+                            <div className="w-20 h-20 bg-red-100 rounded-lg flex items-center justify-center">
+                                <span className="text-red-500 text-2xl font-bold">!</span>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-800">Excluir conta</h3>
+                            <h3 className="text-2xl font-extrabold text-gray-800">Excluir conta</h3>
                             <p className="text-gray-600">
                                 Tem certeza que deseja excluir sua conta? Esta ação é <span className="font-bold text-red-600">irreversível</span> e todos os seus dados serão perdidos permanentemente.
                             </p>
-                            <div className="flex gap-3 w-full mt-2">
+                            <div className="flex gap-4 w-full mt-4">
                                 <button
                                     onClick={closeModal}
-                                    className="flex-1 py-3 px-4 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-all"
+                                    className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg"
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     onClick={confirmDelete}
-                                    className="flex-1 py-3 px-4 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600 transition-all"
+                                    className="flex-1 py-3.5 px-4 bg-red-500 text-white font-bold rounded-lg"
                                 >
                                     Excluir
                                 </button>

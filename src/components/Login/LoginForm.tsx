@@ -31,8 +31,13 @@ function LoginForm({ onSubmit }: LoginFormProps){
 
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
-                <h2 className="text-3xl font-bold text-(--color-secondary)">Login</h2>
+            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-10 rounded-lg shadow border border-gray-200">
+                <div className="text-center">
+                    <h2 className="text-3xl font-bold text-green-700">
+                        Bem-vindo de volta!
+                    </h2>
+                    <p className="text-gray-500 mt-2 text-sm">Entre com suas credenciais</p>
+                </div>
 
                 <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col gap-2">
@@ -43,12 +48,12 @@ function LoginForm({ onSubmit }: LoginFormProps){
                             <img
                                 src={smsIcon}
                                 alt=""
-                                className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 opacity-50"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40"
                             />
                             <input
                                 id="email"
                                 type="email"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-lg bg-gray-50 focus:border-green-500 focus:bg-white focus:outline-none"
                                 placeholder="seu@email.com"
                                 {...register("email")}
                             />
@@ -64,12 +69,12 @@ function LoginForm({ onSubmit }: LoginFormProps){
                             <img
                                 src={cadeadoIcon}
                                 alt=""
-                                className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 opacity-50"
+                                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-40"
                             />
                             <input
                                 id="password"
                                 type="password"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-lg bg-gray-50 focus:border-green-500 focus:bg-white focus:outline-none"
                                 placeholder="••••••••"
                                 {...register("password")}
                             />
@@ -85,19 +90,19 @@ function LoginForm({ onSubmit }: LoginFormProps){
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setRememberMe(e.target.checked)}
                                 className="peer sr-only"
                             />
-                            <span className="relative h-5 w-5 rounded border-2 border-slate-300 bg-white flex items-center justify-center transition-all peer-checked:bg-(--color-secondary) peer-checked:border-(--color-secondary) peer-focus-visible:ring-2 peer-focus-visible:ring-(--color-secondary) peer-focus-visible:ring-offset-2">
+                            <span className="relative h-5 w-5 rounded-md border-2 border-gray-300 bg-white flex items-center justify-center peer-checked:bg-green-500 peer-checked:border-green-500">
                                 <img
                                     src={checkIcon}
                                     alt="check icon"
-                                    className={`w-3 h-3 transition-opacity duration-200 ${rememberMe ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`w-3 h-3 ${rememberMe ? 'opacity-100' : 'opacity-0'}`}
                                 />
                             </span>
-                            <span className="select-none text-sm text-slate-800">Lembrar-me</span>
+                            <span className="select-none text-sm text-gray-600">Lembrar-me</span>
                         </label>
                         <a
                             href="#"
                             onClick={handleForgotPassword}
-                            className="text-sm text-(--color-secondary) hover:text-(--color-primary) font-medium hover:underline transition-colors"
+                            className="text-sm text-green-600 font-medium"
                         >
                             Esqueceu a senha?
                         </a>
@@ -105,7 +110,7 @@ function LoginForm({ onSubmit }: LoginFormProps){
 
                     <button
                         type="submit"
-                        className="w-full py-3 px-4 bg-(--color-secondary) text-white font-bold rounded-lg hover:bg-(--color-primary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2"
+                        className="w-full py-4 px-4 bg-green-600 text-white font-bold rounded-lg mt-2"
                     >
                         Entrar
                     </button>

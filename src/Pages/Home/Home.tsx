@@ -83,26 +83,26 @@ function Home() {
             <main className="min-h-screen bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 py-8">
 
-                    <div className="mb-8 flex justify-between items-start">
+                    <div className="mb-10 flex justify-between items-start">
                         <div>
-                            <h1 className="text-4xl font-bold text-(--color-primary) mb-2">
+                            <h1 className="text-4xl font-bold text-green-700 mb-2">
                                 Bem-vindo!
                             </h1>
-                            <p className="text-gray-600">
+                            <p className="text-gray-500">
                                 Acompanhe e gerencie suas denúncias de falta de energia
                             </p>
                         </div>
                         <button
                             onClick={handleRefresh}
                             disabled={loading}
-                            className="px-4 py-2 bg-(--color-secondary) text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
+                            className="px-5 py-2.5 bg-green-600 text-white rounded-lg disabled:opacity-50 flex items-center gap-2 font-medium"
                         >
                             Atualizar
                         </button>
                     </div>
 
 
-                    <div className="mb-8">
+                    <div className="mb-10">
                         <QuickActions
                             onNewReport={handleNewReport}
                             onViewProfile={handleViewProfile}
@@ -110,25 +110,28 @@ function Home() {
                     </div>
 
 
-                    <div className="mb-8">
+                    <div className="mb-10">
                         <StatsOverview stats={stats} />
                     </div>
 
 
-                    <div className="mb-8">
+                    <div className="mb-10">
                         <MapView reports={allReports} />
                     </div>
 
                     {loading ? (
-                        <div className="flex justify-center items-center py-12">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-(--color-primary)"></div>
+                        <div className="flex justify-center items-center py-16">
+                            <div className="flex flex-col items-center gap-4">
+                                <div className="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin"></div>
+                                <p className="text-gray-500 font-medium">Carregando denúncias...</p>
+                            </div>
                         </div>
                     ) : error ? (
-                        <div className="text-center py-12">
-                            <p className="text-red-500">{error}</p>
+                        <div className="text-center py-16 bg-white rounded-lg shadow">
+                            <p className="text-red-500 font-medium mb-4">{error}</p>
                             <button 
                                 onClick={() => window.location.reload()} 
-                                className="mt-4 px-4 py-2 bg-(--color-primary) text-white rounded-lg hover:opacity-90"
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium"
                             >
                                 Tentar novamente
                             </button>

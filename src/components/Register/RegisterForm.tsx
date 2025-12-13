@@ -30,12 +30,19 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
 
     return (
         <div className="flex flex-col justify-center items-center w-full">
-            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-xl shadow-sm">
-                <h2 className="text-3xl font-bold text-(--color-secondary)">Criar conta</h2>
+            <div className="flex flex-col justify-center items-center gap-8 w-full max-w-md bg-white p-8 rounded-lg shadow border border-gray-200">
+                <div className="flex flex-col items-center gap-2">
+                    <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                        <span className="text-white text-xl font-bold">U</span>
+                    </div>
+                    <h2 className="text-3xl font-extrabold text-green-700">
+                        Criar conta
+                    </h2>
+                </div>
 
                 <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-5 w-full">
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="nome" className="text-sm font-semibold text-gray-700">
+                        <label htmlFor="nome" className="text-sm font-bold text-gray-700">
                             Nome completo
                         </label>
                         <div className="relative">
@@ -47,16 +54,16 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
                             <input
                                 id="nome"
                                 type="text"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-lg bg-white focus:border-green-500 focus:outline-none"
                                 placeholder="Seu nome completo"
                                 {...register("nome")}
                             />
                         </div>
-                        {errors.nome && <p className="text-red-500 text-xs mt-1">{errors.nome.message}</p>}
+                        {errors.nome && <p className="text-red-500 text-xs mt-1 font-medium">{errors.nome.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="cpf" className="text-sm font-semibold text-gray-700">
+                        <label htmlFor="cpf" className="text-sm font-bold text-gray-700">
                             CPF
                         </label>
                         <div className="relative">
@@ -68,16 +75,16 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
                             <input
                                 id="cpf"
                                 type="text"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-lg bg-white focus:border-green-500 focus:outline-none"
                                 placeholder="000.000.000-00"
                                 {...register("cpf")}
                             />
                         </div>
-                        {errors.cpf && <p className="text-red-500 text-xs mt-1">{errors.cpf.message}</p>}
+                        {errors.cpf && <p className="text-red-500 text-xs mt-1 font-medium">{errors.cpf.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                        <label htmlFor="email" className="text-sm font-bold text-gray-700">
                             E-mail
                         </label>
                         <div className="relative">
@@ -89,16 +96,16 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
                             <input
                                 id="email"
                                 type="email"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-lg bg-white focus:border-green-500 focus:outline-none"
                                 placeholder="seu@email.com"
                                 {...register("email")}
                             />
                         </div>
-                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                        {errors.email && <p className="text-red-500 text-xs mt-1 font-medium">{errors.email.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="senha" className="text-sm font-semibold text-gray-700">
+                        <label htmlFor="senha" className="text-sm font-bold text-gray-700">
                             Senha
                         </label>
                         <div className="relative">
@@ -110,16 +117,16 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
                             <input
                                 id="senha"
                                 type="password"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-lg bg-white focus:border-green-500 focus:outline-none"
                                 placeholder="••••••••"
                                 {...register("senha")}
                             />
                         </div>
-                        {errors.senha && <p className="text-red-500 text-xs mt-1">{errors.senha.message}</p>}
+                        {errors.senha && <p className="text-red-500 text-xs mt-1 font-medium">{errors.senha.message}</p>}
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="confirmarSenha" className="text-sm font-semibold text-gray-700">
+                        <label htmlFor="confirmarSenha" className="text-sm font-bold text-gray-700">
                             Confirmar senha
                         </label>
                         <div className="relative">
@@ -131,17 +138,17 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
                             <input
                                 id="confirmarSenha"
                                 type="password"
-                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-300 rounded-lg bg-white focus:border-(--color-secondary) focus:outline-none transition-colors"
+                                className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-lg bg-white focus:border-green-500 focus:outline-none"
                                 placeholder="••••••••"
                                 {...register("confirmarSenha")}
                             />
                         </div>
-                        {errors.confirmarSenha && <p className="text-red-500 text-xs mt-1">{errors.confirmarSenha.message}</p>}
+                        {errors.confirmarSenha && <p className="text-red-500 text-xs mt-1 font-medium">{errors.confirmarSenha.message}</p>}
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full py-3 px-4 bg-(--color-tertiary) text-white font-bold rounded-lg hover:bg-(--color-secondary) focus:outline-none focus:ring-2 focus:ring-(--color-secondary) focus:ring-offset-2 transition-all mt-2"
+                        className="w-full py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg mt-2"
                     >
                         Cadastrar
                     </button>

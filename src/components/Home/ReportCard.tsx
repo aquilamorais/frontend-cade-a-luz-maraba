@@ -4,10 +4,10 @@ import { ReportCardProps, ReportStatus } from './Types';
 function ReportCard({ report, isOwn = false }: ReportCardProps) {
     const navigate = useNavigate();
 
-    const statusColors: Record<ReportStatus, string> = {
-        'RESOLVIDO': 'bg-green-100 text-green-700 border-green-300',
-        'EM_ANDAMENTO': 'bg-yellow-100 text-yellow-700 border-yellow-300',
-        'ABERTO': 'bg-red-100 text-red-700 border-red-300'
+    const statusConfig: Record<ReportStatus, { bg: string; text: string }> = {
+        'RESOLVIDO': { bg: 'bg-green-100', text: 'text-green-700' },
+        'EM_ANDAMENTO': { bg: 'bg-amber-100', text: 'text-amber-700' },
+        'ABERTO': { bg: 'bg-red-100', text: 'text-red-700' }
     };
 
     const statusLabels: Record<ReportStatus, string> = {
@@ -20,29 +20,37 @@ function ReportCard({ report, isOwn = false }: ReportCardProps) {
         navigate(`/report/${report.id}`);
     };
 
-    const formatDate = (dateString: string): string => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    };
+    const config = statusConfig[report.status];
 
     return (
         <div
             onClick={handleClick}
-            className={`p-4 rounded-lg border-2 ${isOwn ? 'bg-(--color-light) border-(--color-tertiary-light)' : 'bg-gray-50 border-gray-200'} hover:shadow-md transition-all cursor-pointer`}
+            className={`p-5 rounded-lg border cursor-pointer ${
+                isOwn 
+                    ? 'bg-green-50 border-green-200' 
+                    : 'bg-white border-gray-200'
+            }`}
         >
-            <div className="flex items-start justify-between mb-3">
-                <div className="flex-1">
-                    <h4 className="font-semibold text-gray-800 mb-1">{report.title}</h4>
-                    <p className="text-sm text-gray-600 mb-2">{report.description}</p>
-                    <p className="text-xs text-gray-500">📍 {report.address} - {report.neighborhood}</p>
+            <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                        {isOwn && (
+                            <span className="px-2 py-0.5 bg-green-600 text-white text-xs font-bold rounded-md">
+                                Minha
+                            </span>
+                        )}
+                        <h4 className="font-bold text-gray-800 truncate">
+                            {report.title}
+                        </h4>
+                    </div>
+                    <p className="text-sm text-gray-500 mb-3 line-clamp-2">{report.description}</p>
+                    <div className="flex items-center gap-2 text-xs text-gray-400">
+                        <span>{report.address}</span>
+                        <span>•</span>
+                        <span>{report.neighborhood}</span>
+                    </div>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-xs font-bold border-2 ${statusColors[report.status]} whitespace-nowrap ml-2`}>
+                <span className={`px-3 py-1.5 rounded-lg text-xs font-bold ${config.bg} ${config.text} whitespace-nowrap`}>
                     {statusLabels[report.status]}
                 </span>
             </div>           

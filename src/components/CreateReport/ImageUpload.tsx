@@ -69,13 +69,13 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
 
     return (
         <div className="flex flex-col gap-2">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-bold text-gray-700">
                 Foto do Problema (opcional)
             </label>
             
             <div 
-                className={`relative flex justify-center items-center rounded-2xl border-2 border-dashed transition-all cursor-pointer
-                    ${preview ? 'border-(--color-secondary) bg-(--color-tertiary-light)' : 'border-(--gray-light) hover:border-(--color-secondary) hover:bg-gray-50'}
+                className={`relative flex justify-center items-center rounded-lg border-2 border-dashed cursor-pointer
+                    ${preview ? 'border-green-500 bg-green-50' : 'border-gray-300'}
                     ${isUploading ? 'opacity-50 pointer-events-none' : ''}
                 `}
                 onClick={!preview ? handleClick : undefined}
@@ -89,10 +89,10 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
                 />
 
                 {isUploading && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-2xl z-10">
+                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 rounded-lg z-10">
                         <div className="flex flex-col items-center gap-2">
-                            <div className="w-8 h-8 border-4 border-(--color-secondary) border-t-transparent rounded-full animate-spin"></div>
-                            <span className="text-sm text-gray-600">Enviando...</span>
+                            <div className="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+                            <span className="text-sm text-gray-600 font-medium">Enviando...</span>
                         </div>
                     </div>
                 )}
@@ -102,12 +102,12 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
                         <img 
                             src={preview} 
                             alt="Preview" 
-                            className="w-full h-48 object-cover rounded-2xl" 
+                            className="w-full h-48 object-cover rounded-lg" 
                         />
                         <button
                             type="button"
                             onClick={handleRemoveImage}
-                            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-lg"
+                            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full"
                             title="Remover imagem"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,20 +117,20 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
                         <button
                             type="button"
                             onClick={handleClick}
-                            className="absolute bottom-2 right-2 px-3 py-1 bg-white text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
+                            className="absolute bottom-2 right-2 px-3 py-1 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-200"
                         >
                             Trocar imagem
                         </button>
                     </div>
                 ) : (
                     <div className="flex flex-col items-center gap-3 py-8 px-4">
-                        <div className="w-16 h-16 bg-(--color-tertiary-light) rounded-full flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-(--color-secondary)" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </div>
                         <div className="text-center">
-                            <p className="text-sm font-medium text-gray-700">Clique para adicionar uma foto</p>
+                            <p className="text-sm font-bold text-gray-700">Clique para adicionar uma foto</p>
                             <p className="text-xs text-gray-500 mt-1">JPG, PNG, WEBP ou GIF (máx. 5MB)</p>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
             </div>
 
             {error && (
-                <p className="text-red-500 text-xs mt-1">{error}</p>
+                <p className="text-red-500 text-xs mt-1 font-medium">{error}</p>
             )}
         </div>
     );

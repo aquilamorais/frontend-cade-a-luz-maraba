@@ -129,10 +129,10 @@ function EditReport() {
         return (
             <>
                 <EditReportHeader />
-                <main className="min-h-screen flex items-center justify-center bg-(--color-secondary)">
+                <main className="min-h-screen flex items-center justify-center bg-green-700">
                     <div className="flex flex-col items-center gap-4">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-                        <p className="text-white">Carregando denúncia...</p>
+                        <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-white font-bold">Carregando denúncia...</p>
                     </div>
                 </main>
                 <Footer />
@@ -144,12 +144,15 @@ function EditReport() {
         return (
             <>
                 <EditReportHeader />
-                <main className="min-h-screen flex items-center justify-center bg-(--color-secondary)">
-                    <div className="flex flex-col items-center gap-4 text-center">
-                        <p className="text-white text-xl">{error || 'Denúncia não encontrada'}</p>
+                <main className="min-h-screen flex items-center justify-center bg-green-700">
+                    <div className="flex flex-col items-center gap-4 text-center p-8 bg-white rounded-lg shadow">
+                        <div className="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center">
+                            <span className="text-red-500 text-2xl font-bold">X</span>
+                        </div>
+                        <p className="text-gray-800 text-xl font-bold">{error || 'Denúncia não encontrada'}</p>
                         <button
                             onClick={() => navigate('/home')}
-                            className="px-6 py-2 bg-white text-(--color-secondary) rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-bold"
                         >
                             Voltar para Home
                         </button>
@@ -164,8 +167,8 @@ function EditReport() {
         <>
             <EditReportHeader />
             <main className="min-h-screen flex flex-col">
-                <div className="flex flex-col gap-4 bg-(--color-secondary) py-8 px-4">
-                    <div className="flex flex-col items-center w-full gap-4">
+                <div className="flex flex-col gap-4 bg-green-700 py-10 px-4">
+                    <div className="flex flex-col items-center w-full gap-6">
                         <EditReportTitle
                             title="Editar Denúncia"
                             subtitle="Atualize as informações da sua denúncia."

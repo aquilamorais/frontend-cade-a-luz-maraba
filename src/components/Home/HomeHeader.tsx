@@ -33,35 +33,50 @@ function HomeHeader() {
     };
 
     return (
-        <header className="flex flex-row justify-between items-center px-8 py-2 bg-white bg-center">
-            <div className="flex flex-row justify-center items-center gap-2.5">
-                <img style={{ width: '50px', height: '50px' }} src={logo} alt="Logo" />
-                <img style={{ width: '120px', height: '50px' }} src={logo2} alt="Logo2" />
+        <header className="sticky top-0 z-50 flex flex-row justify-between items-center px-8 py-3 bg-white border-b border-gray-200">
+            <div className="flex flex-row justify-center items-center gap-3 cursor-pointer" onClick={() => navigate('/home')}>
+                <div className="p-1 rounded-lg bg-green-600">
+                    <img className="w-10 h-10" src={logo} alt="Logo" />
+                </div>
+                <img className="h-10" src={logo2} alt="Logo2" />
             </div>
-            <div className="flex flex-row justify-center items-center gap-4">
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Home</button>
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Sobre</button>
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Contatos</button>
-                <button className="px-5 py-2.5 bg-transparent border-none font-medium rounded-md text-(--gray) cursor-pointer hover:text-(--color-secondary) transition-colors">Ajuda</button>
+            <nav className="hidden md:flex flex-row items-center gap-1">
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                    Home
+                </button>
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                    Sobre
+                </button>
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                    Contatos
+                </button>
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                    Ajuda
+                </button>
+            </nav>
+            <div className="flex flex-row items-center gap-3">
                 {isAdmin && (
                     <Link 
                         to="/admin"
-                        className="px-5 py-2.5 bg-(--color-primary) text-white font-semibold rounded-md hover:opacity-90 transition-opacity"
+                        className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg"
                     >
                         Admin
                     </Link>
                 )}
-                <div className="flex flex-row justify-center items-center gap-4 w-26">
-                    <Link to="/user" className='flex flex-col justify-center items-center py-2.5 w-1/2 border-none font-bold rounded-md bg-(--color-tertiary cursor-pointer hover:bg-(--gray-light) focus:outline-none focus:ring-2 focus:ring-(--gray-light) focus:ring-offset-2 transition-all mt-2'>
-                        <img src={user} alt="" style={{ width: '60%', height: '60%' }} />
-                    </Link>
-                    <button 
-                        onClick={handleLogout}
-                        className='flex flex-col justify-center items-center py-2.5 w-1/2 border-none font-bold rounded-md bg-(--color-tertiary cursor-pointer hover:bg-(--gray-light) focus:outline-none focus:ring-2 focus:ring-(--gray-light) focus:ring-offset-2 transition-all mt-2'
-                    >
-                        <img src={sair} alt="" style={{ width: '60%', height: '60%' }} />
-                    </button>
-                </div>
+                <Link 
+                    to="/user" 
+                    className="p-2 rounded-lg bg-gray-100"
+                    title="Meu Perfil"
+                >
+                    <img src={user} alt="Perfil" className="w-5 h-5 opacity-70" />
+                </Link>
+                <button 
+                    onClick={handleLogout}
+                    className="p-2 rounded-lg bg-gray-100"
+                    title="Sair"
+                >
+                    <img src={sair} alt="Sair" className="w-5 h-5 opacity-70" />
+                </button>
             </div>
         </header>
     );

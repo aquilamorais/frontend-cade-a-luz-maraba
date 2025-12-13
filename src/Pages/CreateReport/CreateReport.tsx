@@ -50,8 +50,8 @@ function CreateReport() {
         <>
             <CreateReportHeader />
             <main className="min-h-screen flex flex-col">
-                <div className="flex flex-col gap-4 bg-(--color-secondary) py-8 px-4">
-                    <div className="flex flex-col items-center w-full gap-4">
+                <div className="flex flex-col gap-4 bg-green-700 py-10 px-4">
+                    <div className="flex flex-col items-center w-full gap-6">
                         <CreateReportTitle
                             title="Registrar Nova Denúncia"
                             subtitle="Informe os detalhes sobre a falta de energia elétrica na sua região."
