@@ -121,13 +121,13 @@ function ProfileForm({ onSubmit, onDelete, initialData = {} }: ProfileFormProps)
                             <button
                                 type="button"
                                 onClick={handleCancel}
-                                className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg"
+                                className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg transition-transform duration-150 active:scale-95"
                             >
                                 Cancelar
                             </button>
                             <button
                                 type="submit"
-                                className="flex-1 py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg"
+                                className="flex-1 py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg transition-transform duration-150 active:scale-95"
                             >
                                 Salvar
                             </button>
@@ -137,7 +137,7 @@ function ProfileForm({ onSubmit, onDelete, initialData = {} }: ProfileFormProps)
                             <button
                                 type="button"
                                 onClick={() => setIsEditing(true)}
-                                className="min-w-sm py-3.5 px-6 bg-green-600 text-white font-bold rounded-lg mt-2"
+                                className="min-w-sm py-3.5 px-6 bg-green-600 text-white font-bold rounded-lg mt-2 transition-transform duration-150 active:scale-95"
                             >
                                 Editar Perfil
                             </button>
@@ -154,7 +154,7 @@ function ProfileForm({ onSubmit, onDelete, initialData = {} }: ProfileFormProps)
                     <button
                         type="button"
                         onClick={onDelete}
-                        className="py-3 px-6 bg-white text-red-600 font-bold text-sm border-2 border-red-200 rounded-lg"
+                        className="py-3 px-6 bg-white text-red-600 font-bold text-sm border-2 border-red-200 rounded-lg transition-transform duration-150 active:scale-95"
                     >
                         Excluir conta
                     </button>

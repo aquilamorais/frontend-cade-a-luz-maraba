@@ -107,7 +107,7 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
                         <button
                             type="button"
                             onClick={handleRemoveImage}
-                            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full"
+                            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full transition-transform duration-150 active:scale-95"
                             title="Remover imagem"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,7 +117,7 @@ function ImageUpload({ onImageUpload, currentImage }: ImageUploadProps) {
                         <button
                             type="button"
                             onClick={handleClick}
-                            className="absolute bottom-2 right-2 px-3 py-1 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-200"
+                            className="absolute bottom-2 right-2 px-3 py-1 bg-white text-gray-700 text-sm font-medium rounded-lg border border-gray-200 transition-transform duration-150 active:scale-95"
                         >
                             Trocar imagem
                         </button>

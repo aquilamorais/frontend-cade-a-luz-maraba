@@ -22,7 +22,7 @@ function AdminHeader() {
                     <span className="text-white text-sm font-medium">Painel Administrativo</span>
                 </div>
                 <button 
-                    className="px-4 py-2 bg-white/20 text-white font-medium rounded-lg flex items-center gap-2"
+                    className="px-4 py-2 bg-white/20 text-white font-medium rounded-lg flex items-center gap-2 transition-transform duration-150 active:scale-95"
                     onClick={() => navigate('/home')}
                 >
                     Voltar

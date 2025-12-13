@@ -20,13 +20,13 @@ function DeleteConfirmModal({ isOpen, userName, onClose, onConfirm }: DeleteConf
                     <div className="flex gap-3">
                         <button
                             onClick={onClose}
-                            className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-lg"
+                            className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-lg transition-transform duration-150 active:scale-95"
                         >
                             Cancelar
                         </button>
                         <button
                             onClick={onConfirm}
-                            className="flex-1 py-3 px-4 bg-red-600 text-white font-semibold rounded-lg"
+                            className="flex-1 py-3 px-4 bg-red-600 text-white font-semibold rounded-lg transition-transform duration-150 active:scale-95"
                         >
                             Excluir
                         </button>

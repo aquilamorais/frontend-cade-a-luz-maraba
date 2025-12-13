@@ -17,23 +17,23 @@ function LoginHeader() {
                 {token && (
                     <Link 
                         to="/home" 
-                        className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600"
+                        className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 transition-transform duration-150 active:scale-95"
                     >
                         Home
                     </Link>
                 )}
-                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 transition-transform duration-150 active:scale-95">
                     Sobre
                 </button>
-                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 transition-transform duration-150 active:scale-95">
                     Contatos
                 </button>
-                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600">
+                <button className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 transition-transform duration-150 active:scale-95">
                     Ajuda
                 </button>
                 <Link 
                     to="/register" 
-                    className="ml-2 px-5 py-2.5 bg-green-600 text-white font-semibold rounded-lg"
+                    className="ml-2 px-5 py-2.5 bg-green-600 text-white font-semibold rounded-lg transition-transform duration-150 active:scale-95"
                 >
                     Registrar-se
                 </Link>

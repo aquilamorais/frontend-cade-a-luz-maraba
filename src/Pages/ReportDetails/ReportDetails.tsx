@@ -164,7 +164,7 @@ function ReportDetails() {
                         <p className="text-gray-700 mb-4 font-bold text-lg">Denúncia não encontrada</p>
                         <button
                             onClick={() => navigate('/home')}
-                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-bold"
+                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-bold transition-transform duration-150 active:scale-95"
                         >
                             Voltar para Home
                         </button>

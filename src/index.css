@@ -49,3 +49,8 @@ body {
   background: var(--gray-400);
   border-radius: 3px;
 }
+
+/* Custom scale for subtle click animation */
+.active\:scale-98:active {
+  transform: scale(0.98);
+}

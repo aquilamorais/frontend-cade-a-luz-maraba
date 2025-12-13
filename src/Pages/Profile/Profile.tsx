@@ -169,13 +169,13 @@ function Profile() {
                             <div className="flex gap-4 w-full mt-4">
                                 <button
                                     onClick={closeModal}
-                                    className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg"
+                                    className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg transition-transform duration-150 active:scale-95"
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     onClick={confirmDelete}
-                                    className="flex-1 py-3.5 px-4 bg-red-500 text-white font-bold rounded-lg"
+                                    className="flex-1 py-3.5 px-4 bg-red-500 text-white font-bold rounded-lg transition-transform duration-150 active:scale-95"
                                 >
                                     Excluir
                                 </button>

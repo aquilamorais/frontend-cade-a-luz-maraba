@@ -10,7 +10,7 @@ function ReportDetailsActions({ onEdit, onDelete }: ReportDetailsActionsProps){
             <div className="flex flex-col gap-4">
                 <button
                     onClick={onEdit}
-                    className="w-full py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg"
+                    className="w-full py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg transition-transform duration-150 active:scale-95"
                 >
                     Editar Denúncia
                 </button>
@@ -24,7 +24,7 @@ function ReportDetailsActions({ onEdit, onDelete }: ReportDetailsActionsProps){
                     </p>
                     <button
                         onClick={onDelete}
-                        className="w-full py-3 px-4 bg-white text-red-600 font-bold text-sm border border-red-200 rounded-lg"
+                        className="w-full py-3 px-4 bg-white text-red-600 font-bold text-sm border border-red-200 rounded-lg transition-transform duration-150 active:scale-95"
                     >
                         Excluir Denúncia
                     </button>

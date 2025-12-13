@@ -173,7 +173,7 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
                             <button
                                 type="button"
                                 onClick={handleGetLocation}
-                                className="flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white text-sm font-bold rounded-lg"
+                                className="flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white text-sm font-bold rounded-lg transition-transform duration-150 active:scale-95"
                             >
                                 Usar Minha Localização
                             </button>
@@ -269,13 +269,13 @@ function CreateReportForm({ onSubmit }: CreateReportFormProps){
                         <button
                             type="button"
                             onClick={() => window.history.back()}
-                            className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg"
+                            className="flex-1 py-3.5 px-4 bg-gray-100 text-gray-700 font-bold rounded-lg transition-transform duration-150 active:scale-95"
                         >
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            className="flex-1 py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg"
+                            className="flex-1 py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg transition-transform duration-150 active:scale-95"
                         >
                             Registrar Denúncia
                         </button>

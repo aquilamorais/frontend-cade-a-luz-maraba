@@ -17,13 +17,13 @@ function Footer(): JSX.Element {
                     <div className="flex flex-col items-center gap-4">
                         <p className="text-sm text-gray-500 font-medium">Siga-nos</p>
                         <div className="flex flex-row items-center gap-4">
-                            <a href="#" className="p-3 bg-white rounded-lg border border-gray-200">
+                            <a href="#" className="p-3 bg-white rounded-lg border border-gray-200 transition-transform duration-150 active:scale-95">
                                 <img src={instagram} alt="Instagram" className="w-5 h-5" />
                             </a>
-                            <a href="#" className="p-3 bg-white rounded-lg border border-gray-200">
+                            <a href="#" className="p-3 bg-white rounded-lg border border-gray-200 transition-transform duration-150 active:scale-95">
                                 <img src={facebook} alt="Facebook" className="w-5 h-5" />
                             </a>
-                            <a href="#" className="p-3 bg-white rounded-lg border border-gray-200">
+                            <a href="#" className="p-3 bg-white rounded-lg border border-gray-200 transition-transform duration-150 active:scale-95">
                                 <img src={twitter} alt="Twitter" className="w-5 h-5" />
                             </a>
                         </div>

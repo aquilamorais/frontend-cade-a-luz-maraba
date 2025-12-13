@@ -92,13 +92,13 @@ function EditUserModal({ user, isOpen, onClose, onSave }: EditUserModalProps) {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-lg"
+                            className="flex-1 py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-lg transition-transform duration-150 active:scale-95"
                         >
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            className="flex-1 py-3 px-4 bg-green-600 text-white font-semibold rounded-lg"
+                            className="flex-1 py-3 px-4 bg-green-600 text-white font-semibold rounded-lg transition-transform duration-150 active:scale-95"
                         >
                             Salvar
                         </button>

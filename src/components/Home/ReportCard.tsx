@@ -25,7 +25,7 @@ function ReportCard({ report, isOwn = false }: ReportCardProps) {
     return (
         <div
             onClick={handleClick}
-            className={`p-5 rounded-lg border cursor-pointer ${
+            className={`p-5 rounded-lg border cursor-pointer transition-transform duration-150 active:scale-98 ${
                 isOwn 
                     ? 'bg-green-50 border-green-200' 
                     : 'bg-white border-gray-200'

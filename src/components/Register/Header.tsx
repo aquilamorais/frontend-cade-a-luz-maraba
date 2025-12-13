@@ -12,11 +12,11 @@ function Header() {
                 <img style={{ width: '110px', height: '45px' }} src={logo2} alt="Logo2" />
             </Link>
             <div className="flex flex-row justify-center items-center gap-2">
-                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer">Home</button>
-                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer">Sobre</button>
-                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer">Contatos</button>
-                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer">Ajuda</button>
-                <Link to="/login" className='px-5 py-2.5 border-none font-bold rounded-lg bg-green-600 text-white cursor-pointer ml-2'>
+                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer transition-transform duration-150 active:scale-95">Home</button>
+                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer transition-transform duration-150 active:scale-95">Sobre</button>
+                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer transition-transform duration-150 active:scale-95">Contatos</button>
+                <button className="px-4 py-2.5 bg-transparent border-none font-semibold rounded-lg text-gray-600 cursor-pointer transition-transform duration-150 active:scale-95">Ajuda</button>
+                <Link to="/login" className='px-5 py-2.5 border-none font-bold rounded-lg bg-green-600 text-white cursor-pointer ml-2 transition-transform duration-150 active:scale-95'>
                     Faça seu login
                 </Link>
             </div>

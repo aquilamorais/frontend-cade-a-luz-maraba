@@ -92,13 +92,6 @@ function Home() {
                                 Acompanhe e gerencie suas denúncias de falta de energia
                             </p>
                         </div>
-                        <button
-                            onClick={handleRefresh}
-                            disabled={loading}
-                            className="px-5 py-2.5 bg-green-600 text-white rounded-lg disabled:opacity-50 flex items-center gap-2 font-medium"
-                        >
-                            Atualizar
-                        </button>
                     </div>
 
 
@@ -131,7 +124,7 @@ function Home() {
                             <p className="text-red-500 font-medium mb-4">{error}</p>
                             <button 
                                 onClick={() => window.location.reload()} 
-                                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium"
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium transition-transform duration-150 active:scale-95"
                             >
                                 Tentar novamente
                             </button>

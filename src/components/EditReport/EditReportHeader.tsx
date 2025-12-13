@@ -17,7 +17,7 @@ function EditReportHeader() {
                 <img src={logo2} alt="Logo2" className="h-10" />
             </div>
             <button 
-                className="px-5 py-2.5 bg-white/20 text-white font-bold rounded-lg"
+                className="px-5 py-2.5 bg-white/20 text-white font-bold rounded-lg transition-transform duration-150 active:scale-95"
                 onClick={() => navigate('/home')}
             >
                 Voltar

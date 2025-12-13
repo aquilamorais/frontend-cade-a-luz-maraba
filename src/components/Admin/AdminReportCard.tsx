@@ -56,7 +56,7 @@ function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCar
                     {!isResolved && (
                         <button
                             onClick={() => onResolve(report.id)}
-                            className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-lg text-sm font-medium"
+                            className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-lg text-sm font-medium transition-transform duration-150 active:scale-95"
                             title="Marcar como resolvida"
                         >
                             <img src={checkVerde} alt="" className="w-4 h-4" />
@@ -65,14 +65,14 @@ function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCar
                     )}
                     <button
                         onClick={() => onEdit(report.id)}
-                        className="p-2.5 bg-blue-50 text-blue-600 rounded-lg"
+                        className="p-2.5 bg-blue-50 text-blue-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Editar denúncia"
                     >
                         <img src={editIcon} alt="" className="w-4 h-4" />
                     </button>
                     <button
                         onClick={() => onDelete(report.id)}
-                        className="p-2.5 bg-red-50 text-red-600 rounded-lg"
+                        className="p-2.5 bg-red-50 text-red-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Excluir denúncia"
                     >
                         <img src={deleteIcon} alt="" className="w-4 h-4" />

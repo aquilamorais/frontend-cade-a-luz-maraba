@@ -172,7 +172,7 @@ function Admin() {
                         <p className="text-red-500 mb-4 font-medium">{error}</p>
                         <button
                             onClick={fetchData}
-                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium"
+                            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium transition-transform duration-150 active:scale-95"
                         >
                             Tentar novamente
                         </button>
@@ -200,7 +200,7 @@ function Admin() {
                     <div className="mb-8 flex gap-3 p-1.5 bg-white rounded-lg shadow-sm border border-gray-200 w-fit">
                         <button
                             onClick={() => setActiveTab('users')}
-                            className={`px-6 py-3 font-semibold rounded-lg flex items-center gap-2 ${
+                            className={`px-6 py-3 font-semibold rounded-lg flex items-center gap-2 transition-transform duration-150 active:scale-95 ${
                                 activeTab === 'users'
                                     ? 'bg-green-600 text-white'
                                     : 'text-gray-600'
@@ -210,7 +210,7 @@ function Admin() {
                         </button>
                         <button
                             onClick={() => setActiveTab('reports')}
-                            className={`px-6 py-3 font-semibold rounded-lg flex items-center gap-2 ${
+                            className={`px-6 py-3 font-semibold rounded-lg flex items-center gap-2 transition-transform duration-150 active:scale-95 ${
                                 activeTab === 'reports'
                                     ? 'bg-green-600 text-white'
                                     : 'text-gray-600'

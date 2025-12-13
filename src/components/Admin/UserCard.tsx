@@ -48,14 +48,14 @@ function UserCard({ user, onEdit, onDelete }: UserCardProps) {
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => onEdit(user)}
-                        className="p-2.5 bg-blue-50 text-blue-600 rounded-lg"
+                        className="p-2.5 bg-blue-50 text-blue-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Editar usuário"
                     >
                         <img src={editIcon} alt="" className="w-4 h-4" />
                     </button>
                     <button
                         onClick={() => onDelete(user.id)}
-                        className="p-2.5 bg-red-50 text-red-600 rounded-lg"
+                        className="p-2.5 bg-red-50 text-red-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Excluir usuário"
                     >
                         <img src={deleteIcon} alt="" className="w-4 h-4" />

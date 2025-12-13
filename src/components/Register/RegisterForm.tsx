@@ -148,7 +148,7 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
 
                     <button
                         type="submit"
-                        className="w-full py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg mt-2"
+                        className="w-full py-3.5 px-4 bg-green-600 text-white font-bold rounded-lg mt-2 transition-transform duration-150 active:scale-95"
                     >
                         Cadastrar
                     </button>

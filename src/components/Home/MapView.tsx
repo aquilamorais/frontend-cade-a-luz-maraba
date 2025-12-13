@@ -24,6 +24,7 @@ const optionIcons: Record<string, Icon> = {
 };
 
 const defaultIcon = createColoredIcon('grey');
+const resolvedIcon = createColoredIcon('green');
 
 const optionLabels: Record<string, string> = {
     'FALTOUENERGIA': 'Falta de Energia',
@@ -51,7 +52,10 @@ const statusLabels: Record<string, string> = {
     'RESOLVIDO': 'Resolvida'
 };
 
-const getIconForOption = (option: string): Icon => {
+const getIconForReport = (option: string, status: string): Icon => {
+    if (status === 'RESOLVIDO') {
+        return resolvedIcon;
+    }
     return optionIcons[option] || defaultIcon;
 };
 
@@ -91,6 +95,13 @@ function MapView({ reports = [] }: MapViewProps) {
                         <span className="text-xs text-gray-600 font-medium">{label}</span>
                     </div>
                 ))}
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg border border-green-200">
+                    <div 
+                        className="w-3 h-3 rounded-full" 
+                        style={{ backgroundColor: '#10B981' }}
+                    />
+                    <span className="text-xs text-green-600 font-medium">Resolvida</span>
+                </div>
             </div>
 
             <div className="relative h-[450px] bg-gray-100">
@@ -112,7 +123,7 @@ function MapView({ reports = [] }: MapViewProps) {
                         <Marker 
                             key={report.id} 
                             position={[report.latitude!, report.longitude!]} 
-                            icon={getIconForOption(report.option)}
+                            icon={getIconForReport(report.option, report.status)}
                         >
                             <Popup>
                                 <div className="min-w-[220px] p-1">
