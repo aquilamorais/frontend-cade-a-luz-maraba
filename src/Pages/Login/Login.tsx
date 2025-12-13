@@ -43,10 +43,10 @@ function Login() {
     return (
         <>
             <LoginHeader />
-            <main className="min-h-[calc(100vh-200px)] w-full flex items-center justify-center py-12 px-4 bg-gray-50">
-                <div className="flex flex-row justify-between items-center max-w-7xl gap-16 w-screen">
+            <main className="min-h-[calc(100vh-200px)] w-full flex items-center justify-center py-8 md:py-12 px-4 bg-gray-50">
+                <div className="flex flex-col-reverse lg:flex-row justify-center lg:justify-between items-center max-w-7xl gap-8 lg:gap-16 w-full">
                     <LoginHero imageSrc={pnglogin} altText="Logo" />
-                    <div className="flex flex-col justify-center items-center max-w-xl">
+                    <div className="flex flex-col justify-center items-center w-full max-w-xl px-2 sm:px-4">
                         <LoginTitle
                             title="Faça seu login!"
                             subtitle="Após o login, você terá acesso ao seu histórico de denúncias e poderá realizar novas denúncias."

@@ -2,8 +2,8 @@ import { LoginHeroProps } from './Types';
 
 function LoginHero({ imageSrc, altText = "Login" }: LoginHeroProps){
     return (
-        <div className="flex flex-col justify-center items-center w-[40dvw] h-[40dvh] rounded-[10px]">
-            <img src={imageSrc} alt={altText} />
+        <div className="hidden lg:flex flex-col justify-center items-center w-full max-w-md lg:max-w-lg xl:max-w-xl rounded-[10px]">
+            <img src={imageSrc} alt={altText} className="w-full h-auto object-contain" />
         </div>
     );
 }
