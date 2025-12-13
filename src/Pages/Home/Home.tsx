@@ -104,7 +104,7 @@ function Home() {
 
 
                     <div className="mb-10">
-                        <StatsOverview stats={stats} />
+                        <StatsOverview stats={stats} reports={allReports} />
                     </div>
 
 

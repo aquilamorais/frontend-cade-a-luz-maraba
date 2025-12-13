@@ -38,6 +38,7 @@ export interface ReportsListProps {
 
 export interface StatsOverviewProps {
     stats: Stats;
+    reports?: Report[];
 }
 
 export interface QuickActionsProps {

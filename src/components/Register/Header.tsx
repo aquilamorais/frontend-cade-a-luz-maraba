@@ -6,7 +6,7 @@ function Header() {
     return (
         <header className="sticky top-0 z-50 flex flex-row justify-between items-center px-8 py-3 bg-white border-b border-gray-200">
             <Link to="/" className="flex flex-row justify-center items-center gap-2">
-                <div className="bg-green-600 p-2 rounded-lg">
+                <div className="p-2 rounded-lg">
                     <img style={{ width: '40px', height: '40px' }} src={logo} alt="Logo" />
                 </div>
                 <img style={{ width: '110px', height: '45px' }} src={logo2} alt="Logo2" />

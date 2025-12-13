@@ -8,7 +8,7 @@ function LoginHeader() {
     return (
         <header className="sticky top-0 z-50 flex flex-row justify-between items-center px-8 py-3 bg-white border-b border-gray-200">
             <Link to="/" className="flex flex-row items-center gap-3">
-                <div className="p-1 rounded-lg bg-green-600">
+                <div className="p-1 rounded-lg">
                     <img className="w-10 h-10" src={logo} alt="Logo" />
                 </div>
                 <img className="h-10" src={logo2} alt="Logo2" />

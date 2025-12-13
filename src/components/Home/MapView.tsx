@@ -1,6 +1,14 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon, LatLngBounds } from 'leaflet';
 import { Report } from './Types';
+import { 
+    OPTION_COLORS, 
+    STATUS_COLORS_MAP, 
+    OPTION_LABELS, 
+    STATUS_LABELS, 
+    STATUS_COLORS,
+    FALLBACK_COLOR 
+} from '../../utils/colors';
 
 const marabaBounds = new LatLngBounds(
     [-5.55, -49.35],
@@ -25,32 +33,6 @@ const optionIcons: Record<string, Icon> = {
 
 const defaultIcon = createColoredIcon('grey');
 const resolvedIcon = createColoredIcon('green');
-
-const optionLabels: Record<string, string> = {
-    'FALTOUENERGIA': 'Falta de Energia',
-    'OSCILACAO': 'Oscilação de Energia',
-    'INCENDIO': 'Incêndio',
-    'MANUTENCAO': 'Poste em Manutenção'
-};
-
-const optionColors: Record<string, string> = {
-    'FALTOUENERGIA': '#3B82F6',
-    'OSCILACAO': '#8B5CF6',
-    'INCENDIO': '#EAB308',
-    'MANUTENCAO': '#F97316'
-};
-
-const statusColors: Record<string, string> = {
-    'ABERTO': '#EF4444',
-    'EM_ANDAMENTO': '#F59E0B',
-    'RESOLVIDO': '#10B981'
-};
-
-const statusLabels: Record<string, string> = {
-    'ABERTO': 'Em Aberto',
-    'EM_ANDAMENTO': 'Em Andamento',
-    'RESOLVIDO': 'Resolvida'
-};
 
 const getIconForReport = (option: string, status: string): Icon => {
     if (status === 'RESOLVIDO') {
@@ -86,11 +68,11 @@ function MapView({ reports = [] }: MapViewProps) {
             
             <div className="flex flex-wrap items-center gap-4 px-6 py-4 bg-gray-50 border-b border-gray-200">
                 <span className="text-sm text-gray-600 font-semibold">Legenda:</span>
-                {Object.entries(optionLabels).map(([key, label]) => (
+                {Object.entries(OPTION_LABELS).map(([key, label]) => (
                     <div key={key} className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg border border-gray-200">
                         <div 
                             className="w-3 h-3 rounded-full" 
-                            style={{ backgroundColor: optionColors[key] }}
+                            style={{ backgroundColor: OPTION_COLORS[key as keyof typeof OPTION_COLORS] }}
                         />
                         <span className="text-xs text-gray-600 font-medium">{label}</span>
                     </div>
@@ -98,7 +80,7 @@ function MapView({ reports = [] }: MapViewProps) {
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-lg border border-green-200">
                     <div 
                         className="w-3 h-3 rounded-full" 
-                        style={{ backgroundColor: '#10B981' }}
+                        style={{ backgroundColor: STATUS_COLORS.resolved }}
                     />
                     <span className="text-xs text-green-600 font-medium">Resolvida</span>
                 </div>
@@ -130,10 +112,10 @@ function MapView({ reports = [] }: MapViewProps) {
                                     <div className="flex items-center gap-2 mb-3">
                                         <div 
                                             className="w-3 h-3 rounded-full shadow-sm" 
-                                            style={{ backgroundColor: optionColors[report.option] || '#6B7280' }}
+                                            style={{ backgroundColor: OPTION_COLORS[report.option as keyof typeof OPTION_COLORS] || FALLBACK_COLOR }}
                                         />
-                                        <span className="text-xs font-bold" style={{ color: optionColors[report.option] || '#6B7280' }}>
-                                            {optionLabels[report.option] || report.option}
+                                        <span className="text-xs font-bold" style={{ color: OPTION_COLORS[report.option as keyof typeof OPTION_COLORS] || FALLBACK_COLOR }}>
+                                            {OPTION_LABELS[report.option] || report.option}
                                         </span>
                                     </div>
                                     <h3 className="font-bold text-gray-800 mb-2 text-base">{report.title}</h3>
@@ -142,11 +124,11 @@ function MapView({ reports = [] }: MapViewProps) {
                                     <span 
                                         className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-bold rounded-lg"
                                         style={{ 
-                                            backgroundColor: `${statusColors[report.status]}15`,
-                                            color: statusColors[report.status]
+                                            backgroundColor: `${STATUS_COLORS_MAP[report.status]}15`,
+                                            color: STATUS_COLORS_MAP[report.status]
                                         }}
                                     >
-                                        {statusLabels[report.status]}
+                                        {STATUS_LABELS[report.status]}
                                     </span>
                                 </div>
                             </Popup>

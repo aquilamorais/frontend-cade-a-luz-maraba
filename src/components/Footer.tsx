@@ -2,7 +2,7 @@ import instagram from '../assets/instagram.png';
 import facebook from '../assets/facebook.png';
 import twitter from '../assets/twitter.png';
 
-function Footer(): JSX.Element {
+function Footer() {
     return (
         <footer className="bg-gray-50 border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-4 py-12">
