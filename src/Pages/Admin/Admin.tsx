@@ -114,6 +114,19 @@ function Admin() {
         navigate(`/edit-report/${reportId}`);
     };
 
+    const handleResolveReport = async (reportId: string) => {
+        try {
+            await api.put(`/complaints/${reportId}`, { status: 'RESOLVIDO' });
+            setReports(reports.map(r => 
+                r.id === reportId ? { ...r, status: 'RESOLVIDO' } : r
+            ));
+            alert('Denúncia marcada como resolvida!');
+        } catch (err: any) {
+            console.error('Erro ao resolver denúncia:', err);
+            alert(err.response?.data?.message || 'Erro ao resolver denúncia.');
+        }
+    };
+
     const handleDeleteReport = (reportId: string) => {
         const report = reports.find(r => r.id === reportId);
         if (report) {
@@ -217,7 +230,8 @@ function Admin() {
                         <AdminReportList 
                             reports={reports} 
                             onEdit={handleEditReport} 
-                            onDelete={handleDeleteReport} 
+                            onDelete={handleDeleteReport}
+                            onResolve={handleResolveReport}
                         />
                     )}
                 </div>

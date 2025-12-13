@@ -1,11 +1,13 @@
 import { Report } from '../Home/Types';
 import editIcon from '../../assets/edit.png';
 import deleteIcon from '../../assets/delete.png';
+import checkVerde from '../../assets/checkverde.png';
 
 interface AdminReportCardProps {
     report: Report;
     onEdit: (reportId: string) => void;
     onDelete: (reportId: string) => void;
+    onResolve: (reportId: string) => void;
 }
 
 const statusColors: Record<string, string> = {
@@ -27,7 +29,9 @@ const optionLabels: Record<string, string> = {
     'MANUTENCAO': 'Poste em Manutenção'
 };
 
-function AdminReportCard({ report, onEdit, onDelete }: AdminReportCardProps) {
+function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCardProps) {
+    const isResolved = report.status === 'RESOLVIDO';
+
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between">
@@ -54,6 +58,20 @@ function AdminReportCard({ report, onEdit, onDelete }: AdminReportCardProps) {
                     </div>
                 </div>
                 <div className="flex gap-2 ml-4">
+                    {!isResolved && (
+                        <button
+                            onClick={() => onResolve(report.id)}
+                            className="flex flex-row gap-2 justify-center items-center p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                            title="Marcar como resolvida"
+                        >
+                            Marcar como resolvida
+                            <img
+                            src={checkVerde}
+                            alt=""
+                            className="w-4 h-4 opacity-60"
+                            />
+                        </button>
+                    )}
                     <button
                         onClick={() => onEdit(report.id)}
                         className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"

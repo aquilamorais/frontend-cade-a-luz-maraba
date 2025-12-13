@@ -5,9 +5,10 @@ interface AdminReportListProps {
     reports: Report[];
     onEdit: (reportId: string) => void;
     onDelete: (reportId: string) => void;
+    onResolve: (reportId: string) => void;
 }
 
-function AdminReportList({ reports, onEdit, onDelete }: AdminReportListProps) {
+function AdminReportList({ reports, onEdit, onDelete, onResolve }: AdminReportListProps) {
     if (reports.length === 0) {
         return (
             <div className="bg-white rounded-xl shadow-sm p-8 text-center">
@@ -30,7 +31,8 @@ function AdminReportList({ reports, onEdit, onDelete }: AdminReportListProps) {
                         key={report.id} 
                         report={report} 
                         onEdit={onEdit} 
-                        onDelete={onDelete} 
+                        onDelete={onDelete}
+                        onResolve={onResolve}
                     />
                 ))}
             </div>
