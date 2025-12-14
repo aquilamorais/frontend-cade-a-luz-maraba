@@ -1,7 +1,7 @@
 import { UserListProps } from './Types';
 import UserCard from './UserCard';
 
-function UserList({ users, onEdit, onDelete }: UserListProps) {
+function UserList({ users, onEdit, onDelete, onUserClick }: UserListProps) {
     if (users.length === 0) {
         return (
             <div className="bg-white rounded-lg p-12 text-center border border-gray-200">
@@ -30,7 +30,8 @@ function UserList({ users, onEdit, onDelete }: UserListProps) {
                         key={user.id} 
                         user={user} 
                         onEdit={onEdit} 
-                        onDelete={onDelete} 
+                        onDelete={onDelete}
+                        onUserClick={onUserClick}
                     />
                 ))}
             </div>

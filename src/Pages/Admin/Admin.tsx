@@ -73,6 +73,14 @@ function Admin() {
         }
     };
 
+    const handleUserClick = (userId: string) => {
+        navigate(`/user/${userId}`);
+    };
+
+    const handleReportClick = (reportId: string) => {
+        navigate(`/report/${reportId}`);
+    };
+
     const handleEditUser = (user: User) => {
         setEditingUser(user);
     };
@@ -224,7 +232,8 @@ function Admin() {
                         <UserList 
                             users={users} 
                             onEdit={handleEditUser} 
-                            onDelete={handleDeleteUser} 
+                            onDelete={handleDeleteUser}
+                            onUserClick={handleUserClick}
                         />
                     ) : (
                         <AdminReportList 
@@ -232,6 +241,7 @@ function Admin() {
                             onEdit={handleEditReport} 
                             onDelete={handleDeleteReport}
                             onResolve={handleResolveReport}
+                            onReportClick={handleReportClick}
                         />
                     )}
                 </div>

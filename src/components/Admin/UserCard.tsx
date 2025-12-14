@@ -4,13 +4,16 @@ import cpfIcon from '../../assets/cpf.png';
 import editIcon from '../../assets/edit.png';
 import deleteIcon from '../../assets/delete.png';
 
-function UserCard({ user, onEdit, onDelete }: UserCardProps) {
+function UserCard({ user, onEdit, onDelete, onUserClick }: UserCardProps) {
     const isAdmin = user.role === 'ADMIN';
     
     return (
-        <div className={`transition-transform duration-150 hover:border-green-600 hover:shadow-xl border border-gray-200 active:scale-98 bg-white rounded-lg p-5 ${
-            isAdmin ? 'border-purple-200' : 'border-gray-200'
-        }`}>
+        <div 
+            className={`transition-transform duration-150 hover:shadow-xl border border-gray-200 active:scale-98 bg-white rounded-lg p-5 ${
+                isAdmin ? 'border-purple-200' : 'border-gray-200'
+            } ${onUserClick ? 'cursor-pointer' : ''}`}
+            onClick={() => onUserClick?.(user.id)}
+        >
             <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-4">
                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold ${
@@ -47,14 +50,20 @@ function UserCard({ user, onEdit, onDelete }: UserCardProps) {
                 </div>
                 <div className="flex items-center gap-2">
                     <button
-                        onClick={() => onEdit(user)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit(user);
+                        }}
                         className="p-2.5 bg-blue-50 text-blue-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Editar usuário"
                     >
                         <img src={editIcon} alt="" className="w-4 h-4" />
                     </button>
                     <button
-                        onClick={() => onDelete(user.id)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(user.id);
+                        }}
                         className="p-2.5 bg-red-50 text-red-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Excluir usuário"
                     >

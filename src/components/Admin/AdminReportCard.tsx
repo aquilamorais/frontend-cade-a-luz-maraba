@@ -8,6 +8,7 @@ interface AdminReportCardProps {
     onEdit: (reportId: string) => void;
     onDelete: (reportId: string) => void;
     onResolve: (reportId: string) => void;
+    onReportClick?: (reportId: string) => void;
 }
 
 const statusConfig: Record<string, { bg: string; text: string; border: string }> = {
@@ -29,12 +30,15 @@ const optionLabels: Record<string, string> = {
     'MANUTENCAO': 'Poste em Manutenção'
 };
 
-function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCardProps) {
+function AdminReportCard({ report, onEdit, onDelete, onResolve, onReportClick }: AdminReportCardProps) {
     const isResolved = report.status === 'RESOLVIDO';
     const config = statusConfig[report.status];
 
     return (
-        <div className={`bg-white rounded-lg border ${config.border} p-5 transition-transform duration-150 hover:border-green-600 hover:shadow-xl border border-gray-200 active:scale-98`}>
+        <div 
+            className={`bg-white rounded-lg border-2 ${config.border} p-5 transition-transform duration-150 hover:shadow-xl active:scale-98 ${onReportClick ? 'cursor-pointer' : ''} ${isResolved ? 'opacity-75' : ''}`}
+            onClick={() => onReportClick?.(report.id)}
+        >
             <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-3">
@@ -55,7 +59,10 @@ function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCar
                 <div className="flex items-center gap-2">
                     {!isResolved && (
                         <button
-                            onClick={() => onResolve(report.id)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onResolve(report.id);
+                            }}
                             className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-lg text-sm font-medium transition-transform duration-150 active:scale-95"
                             title="Marcar como resolvida"
                         >
@@ -64,14 +71,20 @@ function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCar
                         </button>
                     )}
                     <button
-                        onClick={() => onEdit(report.id)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit(report.id);
+                        }}
                         className="p-2.5 bg-blue-50 text-blue-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Editar denúncia"
                     >
                         <img src={editIcon} alt="" className="w-4 h-4" />
                     </button>
                     <button
-                        onClick={() => onDelete(report.id)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(report.id);
+                        }}
                         className="p-2.5 bg-red-50 text-red-600 rounded-lg transition-transform duration-150 active:scale-95"
                         title="Excluir denúncia"
                     >

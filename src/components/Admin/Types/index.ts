@@ -11,12 +11,14 @@ export interface UserCardProps {
     user: User;
     onEdit: (user: User) => void;
     onDelete: (userId: string) => void;
+    onUserClick?: (userId: string) => void;
 }
 
 export interface UserListProps {
     users: User[];
     onEdit: (user: User) => void;
     onDelete: (userId: string) => void;
+    onUserClick?: (userId: string) => void;
 }
 
 export interface EditUserModalProps {

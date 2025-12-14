@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Footer from '../../components/Footer';
 import ProfileTitle from '../../components/Profile/ProfileTitle';
 import ProfileForm from '../../components/Profile/ProfileForm';
@@ -10,10 +10,12 @@ import { UserData, ProfileFormData, LoggedUser } from './Types';
 
 function Profile() {
     const navigate = useNavigate();
+    const { userId } = useParams<{ userId?: string }>();
     const [userData, setUserData] = useState<UserData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
     const [isModalClosing, setIsModalClosing] = useState<boolean>(false);
+    const [isViewingOtherUser, setIsViewingOtherUser] = useState<boolean>(false);
 
     const closeModal = () => {
         setIsModalClosing(true);
@@ -32,7 +34,29 @@ function Profile() {
 
         const loggedUser = getLoggedUser() as LoggedUser | null;
 
-        if (loggedUser) {
+        if (userId) {
+            setIsViewingOtherUser(true);
+            api.get(`/users/${userId}`)
+                .then((response) => {
+                    console.log('Dados do usuário:', response.data);
+                    setUserData({
+                        id: response.data.id,
+                        nome: response.data.name,
+                        cpf: response.data.cpf,
+                        email: response.data.email,
+                        role: response.data.role
+                    });
+                })
+                .catch((error) => {
+                    console.error('Erro ao obter dados do usuário:', error.response?.data || error.message);
+                    alert('Erro ao carregar dados do usuário.');
+                    navigate('/admin');
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        } else if (loggedUser) {
+            setIsViewingOtherUser(false);
             if (loggedUser.cpf) {
                 api.get(`/users/${loggedUser.cpf}`)
                     .then((response) => {
@@ -71,7 +95,7 @@ function Profile() {
         } else {
             setLoading(false);
         }
-    }, [navigate]);
+    }, [navigate, userId]);
 
     const handleSubmit = (formData: ProfileFormData) => {
         console.log('Profile update:', formData);
@@ -140,10 +164,10 @@ function Profile() {
                 <div className="flex flex-col gap-4 bg-green-700 py-10 px-4">
                     <div className="flex flex-col items-center w-full gap-6">
                         <ProfileTitle
-                            title="Gerencie seu perfil"
-                            subtitle="Mantenha seus dados atualizados para receber notificações e acompanhar suas denúncias."
+                            title={isViewingOtherUser ? "Perfil do Usuário" : "Gerencie seu perfil"}
+                            subtitle={isViewingOtherUser ? "Visualizando informações do usuário." : "Mantenha seus dados atualizados para receber notificações e acompanhar suas denúncias."}
                         />
-                        {userData && <ProfileForm onSubmit={handleSubmit} onDelete={handleDelete} initialData={userData} />}
+                        {userData && <ProfileForm onSubmit={handleSubmit} onDelete={isViewingOtherUser ? undefined : handleDelete} initialData={userData} />}
                     </div>
                 </div>
             </main>

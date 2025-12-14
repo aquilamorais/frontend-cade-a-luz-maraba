@@ -145,19 +145,21 @@ function ProfileForm({ onSubmit, onDelete, initialData = {} }: ProfileFormProps)
 
                     )}
                 </form>
-                <div className="border-t-2 border-red-100 pt-5 mt-2 w-full">
-                    <div className="flex items-center gap-2 mb-3">
-                        <span className="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-bold rounded-lg">CUIDADO</span>
+                {onDelete && (
+                    <div className="border-t-2 border-red-100 pt-5 mt-2 w-full">
+                        <div className="flex items-center gap-2 mb-3">
+                            <span className="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-bold rounded-lg">CUIDADO</span>
+                        </div>
+                        <p className="text-sm text-gray-600 mb-4">Ações irreversíveis relacionadas à sua conta</p>
+                        <button
+                            type="button"
+                            onClick={onDelete}
+                            className="py-3 px-6 bg-white text-red-600 font-bold text-sm border-2 border-red-200 rounded-lg transition-transform duration-150 active:scale-95"
+                        >
+                            Excluir conta
+                        </button>
                     </div>
-                    <p className="text-sm text-gray-600 mb-4">Ações irreversíveis relacionadas à sua conta</p>
-                    <button
-                        type="button"
-                        onClick={onDelete}
-                        className="py-3 px-6 bg-white text-red-600 font-bold text-sm border-2 border-red-200 rounded-lg transition-transform duration-150 active:scale-95"
-                    >
-                        Excluir conta
-                    </button>
-                </div>
+                )}
             </div>
         </div>
     );
