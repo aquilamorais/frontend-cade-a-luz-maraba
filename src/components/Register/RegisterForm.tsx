@@ -75,6 +75,7 @@ function RegisterForm({ onSubmit }: RegisterFormProps) {
                             <input
                                 id="cpf"
                                 type="text"
+                                maxLength={11}
                                 className="w-full pl-10 sm:pl-11 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-white focus:border-green-500 focus:outline-none"
                                 placeholder="000.000.000-00"
                                 {...register("cpf")}
