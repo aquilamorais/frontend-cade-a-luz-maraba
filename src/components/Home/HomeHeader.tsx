@@ -4,16 +4,25 @@ import { jwtDecode } from 'jwt-decode';
 import logo from '../../assets/logo.png';
 import logo2 from '../../assets/logo2.png';
 import user from '../../assets/nome.png';
-import sair from '../../assets/sair.png';
+import sair from '../../assets/sairred.png';
+import { ProfileFormData, ProfileFormProps } from '../Profile/Types';
 
 interface JwtPayload {
     id: string;
+    name: string;
+    email: string;
     role: string;
 }
 
-function HomeHeader() {
+function HomeHeader({onSubmit, initialData = {}}: ProfileFormProps) {
     const navigate = useNavigate();
     const [isAdmin, setIsAdmin] = useState(false);
+    const [formData, setFormData] = useState<ProfileFormData>({
+        nome: initialData.nome || '',
+        cpf: initialData.cpf || '',
+        email: initialData.email || '',
+        role: initialData.role || ''
+    });
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -21,6 +30,12 @@ function HomeHeader() {
             try {
                 const decoded = jwtDecode<JwtPayload>(token);
                 setIsAdmin(decoded.role === 'ADMIN');
+                setFormData(prev => ({
+                    ...prev,
+                    nome: decoded.name,
+                    email: decoded.email,
+                    role: decoded.role
+                }));
             } catch {
                 setIsAdmin(false);
             }
@@ -65,14 +80,15 @@ function HomeHeader() {
                 )}
                 <Link 
                     to="/user" 
-                    className="p-2 rounded-lg bg-gray-100 transition-transform duration-150 active:scale-95"
+                    className="flex flex-row gap-1 font-bold text-green-700 items-center justify-center p-2 rounded-lg bg-gray-100 transition-transform duration-150 hover:border-1 hover:border-green-600 active:scale-95"
                     title="Meu Perfil"
                 >
                     <img src={user} alt="Perfil" className="w-5 h-5 opacity-70" />
+                    <span>{formData.nome}</span>
                 </Link>
                 <button 
                     onClick={handleLogout}
-                    className="p-2 rounded-lg bg-gray-100 transition-transform duration-150 active:scale-95"
+                    className="p-2 rounded-lg bg-red-100 hover:border-1 hover:border-red-400 transition-transform duration-150 active:scale-95"
                     title="Sair"
                 >
                     <img src={sair} alt="Sair" className="w-5 h-5 opacity-70" />

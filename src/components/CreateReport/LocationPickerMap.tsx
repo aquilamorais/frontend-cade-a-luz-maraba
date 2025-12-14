@@ -101,10 +101,10 @@ function LocationPickerMap({ onLocationSelect, initialLat, initialLng }: Locatio
 
     return (
         <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-gray-700">
+            <label className="text-sm font-bold text-gray-700 pl-2 pt-1">
                 Marcar no Mapa
             </label>
-            <p className="text-xs text-gray-500 mb-2">
+            <p className="text-xs text-gray-500 mb-2 pl-2">
                 Clique no mapa para marcar a localização e preencher o endereço automaticamente
             </p>
             <div className="relative w-full h-[300px] rounded-lg overflow-hidden border border-gray-200">

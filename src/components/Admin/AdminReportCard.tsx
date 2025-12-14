@@ -34,7 +34,7 @@ function AdminReportCard({ report, onEdit, onDelete, onResolve }: AdminReportCar
     const config = statusConfig[report.status];
 
     return (
-        <div className={`bg-white rounded-lg border ${config.border} p-5`}>
+        <div className={`bg-white rounded-lg border ${config.border} p-5 transition-transform duration-150 hover:border-green-600 hover:shadow-xl border border-gray-200 active:scale-98`}>
             <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-3">

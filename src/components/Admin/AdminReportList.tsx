@@ -19,7 +19,7 @@ function AdminReportList({ reports, onEdit, onDelete, onResolve }: AdminReportLi
     }
 
     return (
-        <div className="bg-white rounded-lg overflow-hidden border border-gray-200">
+        <div className="bg-white rounded-lg overflow-hidden border border-gray-200 ">
             <div className="bg-green-600 px-6 py-5">
                 <div className="flex items-center justify-between">
                     <div>

@@ -53,7 +53,7 @@ function CreateReport() {
                 <div className="flex flex-col gap-4 bg-green-700 py-10 px-4">
                     <div className="flex flex-col items-center w-full gap-6">
                         <CreateReportTitle
-                            title="Registrar Nova Denúncia"
+                            title="Registrar nova denúncia"
                             subtitle="Informe os detalhes sobre a falta de energia elétrica na sua região."
                         />
                         <CreateReportForm onSubmit={handleSubmit} />

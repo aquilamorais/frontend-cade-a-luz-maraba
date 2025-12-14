@@ -33,7 +33,7 @@ function StatsOverview({ stats, reports = [] }: StatsOverviewProps) {
                     <p className="text-sm text-gray-500">Estatísticas em tempo real</p>
                 </div>
                 
-                <div className="flex gap-2 p-1 bg-gray-100 rounded-lg w-fit">
+                <div className="flex gap-2 p-1 bg-gray-100 rounded-lg transition-all duration-150 w-fit">
                     <button
                         onClick={() => setActiveView('status')}
                         className={`px-4 py-2 text-sm font-medium rounded-md transition-transform duration-150 active:scale-95 ${

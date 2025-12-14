@@ -8,7 +8,7 @@ function UserCard({ user, onEdit, onDelete }: UserCardProps) {
     const isAdmin = user.role === 'ADMIN';
     
     return (
-        <div className={`bg-white rounded-lg border p-5 ${
+        <div className={`transition-transform duration-150 hover:border-green-600 hover:shadow-xl border border-gray-200 active:scale-98 bg-white rounded-lg p-5 ${
             isAdmin ? 'border-purple-200' : 'border-gray-200'
         }`}>
             <div className="flex items-start justify-between gap-4">
